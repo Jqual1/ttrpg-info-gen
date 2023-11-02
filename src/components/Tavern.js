@@ -20,6 +20,11 @@ export default function GenerateTavern() {
         handleTavern();
     }, []);
 
+    useEffect(() => {
+      var tavern = {tavernName: tavernName, tavernComfort: comfort}
+      localStorage.setItem("tavern", JSON.stringify(tavern))
+    }, [tavernName, comfort])
+
     function handleAddNPC(e) {
         setNPCs(prevNPCs => {
           return [...prevNPCs, <GenerateNPC />]
@@ -33,7 +38,6 @@ export default function GenerateTavern() {
 
     function tavernNameGen(num) {
         var variation = randomNumber(2);
-        console.log(tavernData);
         if (num === 0) {
             return("The " + tavernData[ADJ].roll[randomNumber(100)] + " " + tavernData[NOUN1].roll[randomNumber(100)])
           }
@@ -59,7 +63,7 @@ export default function GenerateTavern() {
     }
 
     // Runs the Tavern Name Generator
-    const handleTaverName = () => {
+    const handleTavernName = () => {
       setTavernName(tavernNameGen(randomNumber(4)));
     };
 
@@ -70,7 +74,7 @@ export default function GenerateTavern() {
 
     // Runs all Tavern Generators
     const handleTavern = () => {
-      handleTaverName();
+      handleTavernName();
       handleTavernComfort();
     };
   
@@ -80,7 +84,7 @@ export default function GenerateTavern() {
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleTaverName} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleTavernName} />
                     <span className="p-float-label">
                         <InputText id="tavernName" value={tavernName} onChange={(e) => setTavernName(e.target.value)} />
                         <label htmlFor="tavernName">Tavern Name</label>

@@ -28,6 +28,18 @@ export default function GenerateNPC() {
       return (Math.floor(Math.random() * (options)));
     }
 
+    const handleMakeJSON = () => {
+        const json = {
+            firstName:      firstName,
+            lastName:       lastName,
+            personality:    personality,
+            race:           race,
+            hairColor:      hairColor,
+            eyeColor:       eyeColor
+        }
+        return json;
+    }
+
     // Runs the First Name Gen
     const handleFirstName = () => {
         setFirstName(npcData[FIRST].roll[randomNumber(npcData[FIRST].roll.length)]);
