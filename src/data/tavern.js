@@ -3,6 +3,7 @@ export const tavernData = [
         "title": "d100 Verb", 
         "id":"d100verb_tavern_names", 
         "roll":[
+            "Moping",
             "Drowning",
             "Hanging",
             "Belching",
@@ -108,6 +109,7 @@ export const tavernData = [
         "title": "d100 Adjective", 
         "id":"d100adjective_tavern_names", 
         "roll":[
+            "Wayward",
             "Quiet",
             "Jolly",
             "Good",
@@ -213,6 +215,7 @@ export const tavernData = [
         "title": "d100 Noun 1", 
         "id":"d100noun1_tavern_names", 
         "roll":[
+            "Warhorse",
             "Horseman",
             "Maiden",
             "Mage",
@@ -318,6 +321,7 @@ export const tavernData = [
         "title": "d100 Noun 2", 
         "id":"d100noun2_tavern_names", 
         "roll":[
+            "Mount",
             "Saddle",
             "Guild",
             "Fangs",
@@ -418,5 +422,15 @@ export const tavernData = [
             "Boot",
             "Gauntlet"   
         ]
-    }
+    },
+    {
+        "title": "d4 Comfort Levels", 
+        "id":"d4comfortlevels_tavern", 
+        "roll":[
+            "Poor (2sp)", 
+            "Modest (1gp)", 
+            "Comfortable (2gp)", 
+            "Wealthy (4gp)" 
+    ]
+}
 ]

@@ -79,3 +79,7 @@ body {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.p-float-label input.p-filled ~ label {
+  top: -0.5rem;
+}
