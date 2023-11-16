@@ -4,7 +4,7 @@ import { npcData } from "../data/npcs"
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 
-export default function GenerateNPC() {
+export default function GenerateNPC(props) {
     const FIRST         = 0;
     const LAST          = 1;
     const PERSONALITY   = 2;
@@ -12,6 +12,8 @@ export default function GenerateNPC() {
     const HAIRCOLOR     = 4;
     const EYECOLOR      = 5;
 
+    const parent = props.props.parent;
+    const key = `${props.props.parent}_${props.props.key}`;
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [personality, setPersonality] = useState('');
@@ -23,6 +25,10 @@ export default function GenerateNPC() {
         handleNPC();
     }, []);
 
+    useEffect(() => {
+        handleMakeJSON();
+    }, [firstName, lastName, personality, race, hairColor, eyeColor])
+
     function randomNumber(options) {
       // Get the number between 0 (inclusive) and max (exclusive) for an array
       return (Math.floor(Math.random() * (options)));
@@ -30,6 +36,8 @@ export default function GenerateNPC() {
 
     const handleMakeJSON = () => {
         const json = {
+            parent:         parent,
+            type:           'npc',
             firstName:      firstName,
             lastName:       lastName,
             personality:    personality,
@@ -37,7 +45,8 @@ export default function GenerateNPC() {
             hairColor:      hairColor,
             eyeColor:       eyeColor
         }
-        return json;
+        sessionStorage.setItem(key, JSON.stringify(json));
+        console.log(JSON.parse(sessionStorage.getItem(key)));
     }
 
     // Runs the First Name Gen

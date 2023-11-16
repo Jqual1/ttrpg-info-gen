@@ -2,26 +2,34 @@ import React, { useEffect, useState } from "react";
 import { saveAs } from 'file-saver';
 import { Button } from "primereact/button";
 import GenerateTavern from "../components/Tavern"
-import { tavernData } from "../data/tavern";
+import format from "../utils/format";
 
 export default function GenerateTest() {
 
-  const data = {};
+  var data = [];
   
   function exportData() {
-    const fileData = JSON.stringify(data);
-    const blob = new Blob([fileData], { type: "text/plain" });
-    saveAs(fileData, "test.md")
+    const blob = new Blob(data, { type: "text/plain" });
+    console.log(data);
+    saveAs(blob, "test.md")
   }
 
   const test = () => {
-    console.log({ ...localStorage });
+    data = [];
+    console.log(sessionStorage.length);
+    for (var i = 0; i < sessionStorage.length; i++){
+      data.push(format(JSON.parse(sessionStorage.getItem(sessionStorage.key(i)))));
+    }
+    console.log(data);
+    exportData();
   }
+
+  var props = {parent: 'null', key: 'tavern1'}
   
     return (
       <div>
       <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={test} />
-      <GenerateTavern />
+      <GenerateTavern props={props} />
       </div>
     );
 }

@@ -5,29 +5,46 @@ import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import GenerateNPC from "./NPC";
 
-export default function GenerateTavern() {
+export default function GenerateTavern(props) {
     const VERB  = 0;
     const ADJ   = 1;
     const NOUN1 = 2;
     const NOUN2 = 3;
     const COMFT = 4;
 
+    const parent = props.props.parent;
+    const key = `${props.props.parent}_${props.props.key}`;
     const [tavernName, setTavernName] = useState('');
     const [comfort, setComfort] = useState('');
     const [npcs, setNPCs] = useState([]);
+    const [npcCurr, setNPCCurr] = useState(1);
 
     useEffect(() => {
         handleTavern();
     }, []);
 
     useEffect(() => {
-      var tavern = {tavernName: tavernName, tavernComfort: comfort}
-      localStorage.setItem("tavern", JSON.stringify(tavern))
+      handleMakeJSON();
     }, [tavernName, comfort])
 
+    const handleMakeJSON = () => {
+      var json = {
+        parent:         parent,
+        type:           'tavern',
+        tavernName:     tavernName, 
+        tavernComfort:  comfort
+      }
+      sessionStorage.setItem(key, JSON.stringify(json))
+      console.log(JSON.parse(sessionStorage.getItem(key)));
+  }
+
     function handleAddNPC(e) {
+        setNPCCurr(npcCurr+1);
+        var npcKey = "npc" + npcCurr;
+        console.log(npcKey);
+        var currNpc = {parent: key, key: npcKey}
         setNPCs(prevNPCs => {
-          return [...prevNPCs, <GenerateNPC />]
+          return [...prevNPCs, <GenerateNPC props={currNpc} />]
         })
       }
 
