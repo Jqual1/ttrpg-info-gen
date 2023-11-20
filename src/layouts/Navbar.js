@@ -6,7 +6,7 @@ export default function Navbar() {
             TTRPG Info Generator
         </Link>
         <ul>
-            <CustomLink to="/gen-test">Generate Test</CustomLink>
+            <CustomLink to="/gen-test">Generate Info</CustomLink>
             <CustomLink to="/gen-num">Generate Number</CustomLink>
         </ul>
     </nav>

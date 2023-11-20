@@ -6,7 +6,7 @@ import './App.css';
 //----------------------------------\\
 import Navbar from './layouts/Navbar';
 import Home from './pages/Home';
-import GenerateTest from './pages/GenerateTest'
+import GenerateInfo from './pages/GenerateInfo'
 import GenerateNum from './pages/GenerateNum';
 import { Route, Routes } from "react-router-dom";
 
@@ -17,7 +17,7 @@ function App() {
       <div className='container'>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/gen-test" element={<GenerateTest />} />
+          <Route path="/gen-test" element={<GenerateInfo />} />
           <Route path="/gen-num" element={<GenerateNum />} />
         </Routes>
       </div>

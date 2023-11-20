@@ -96,7 +96,7 @@ export default function GenerateTavern(props) {
     };
   
     return (
-      <div className="card">
+      <div>
         <h1>Tavern/Inn Generator</h1> 
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
@@ -134,7 +134,7 @@ export default function GenerateTavern(props) {
                 <Button className="p-inputgroup-addon" label="Add NPC" severity="help" onClick={handleAddNPC} />
             </div>
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Regenerate All" onClick={handleTavern} />
+                <Button className="p-inputgroup-addon" label="Regenerate Tavern" onClick={handleTavern} />
             </div>
         </div>
     </div>

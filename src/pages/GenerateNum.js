@@ -15,7 +15,7 @@ export default function GenerateNum() {
     function randomNumberInRange(min, max) {
       // 👇️ get number between min (inclusive) and max (inclusive)
       var number = Math.floor(Math.random() * (max - min + 1)) + min;
-      setHistory([].concat(number, history));
+      setHistory([].concat(history, number));
       return number;
     }
   
@@ -77,7 +77,7 @@ export default function GenerateNum() {
             </div>
 
             {/* TODO Currently prints the numbers right after eachother with no space or formatting, need to format */}
-            history = {history} 
+            history = {history.join(", ")} 
 
       </div>
     );

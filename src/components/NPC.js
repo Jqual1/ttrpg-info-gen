@@ -90,7 +90,7 @@ export default function GenerateNPC(props) {
     };
   
     return (
-      <div>
+    <div>
         <h2>NPC Generator</h2>
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
