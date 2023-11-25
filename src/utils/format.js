@@ -5,9 +5,13 @@ export default function format(param) {
 
     var output = '';
 
+    for (var i = 0; i < input.parent.split("_").length; i++) {
+        output += '#';
+    }
+
     if (input.type === 'tavern') {
-        output = 
-        `# (Tavern) ${input.tavernName}\n` +
+        output += 
+        ` (Tavern) ${input.tavernName}\n` +
         `- **Comfort Level**: ${input.tavernComfort}\n` +
         `- **Event**: ${input.event}\n` +
         `- **Entertainment**: ${input.entertainment}\n` +
@@ -16,8 +20,8 @@ export default function format(param) {
         `- **Trouble**: ${input.trouble}\n` +
         `- **Notable**: ${input.notable}\n`; 
     } else if (input.type === 'shop') {
-        output = 
-        `# (Shop) ${input.product}\n` +
+        output += 
+        ` (Shop) ${input.product}\n` +
         `- **Shop Type**: ${input.shopType}\n` +
         `- **Size**: ${input.size}\n` +
         `- **Owner**: ${input.owner}\n` +
@@ -29,11 +33,6 @@ export default function format(param) {
         `- **Point of Interest**: ${input.interest}\n`;
 
     } else if (input.type === 'npc') {
-        if (input.parent === 'null') {
-            output = '#'
-        } else {
-            output = '##'
-        }
         output +=
         ` (NPC) ${input.firstName} ${input.lastName}\n` +
         `- **Personality**: ${input.personality}\n` +
