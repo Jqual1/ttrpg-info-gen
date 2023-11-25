@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { saveAs } from 'file-saver';
 import { Button } from "primereact/button";
-import GenerateTavern from "../components/Tavern"
+import GenerateTavern from "../components/Tavern";
+import GenerateShop from "../components/Shop";
 import GenerateNPC from "../components/NPC";
 import format from "../utils/format";
 
@@ -58,6 +59,15 @@ export default function GenerateInfo() {
     })
   }
 
+  function handleAddShop(e) {
+    setNumCurr(numCurr+1);
+    var shopKey = "shop" + numCurr;
+    var currGen = {parent: "null", key: shopKey}
+    setGens(prevGens => {
+      return [...prevGens, [<div className="card">, <GenerateShop props={currGen} />, </div>]]
+    })
+  }
+
   function handleAddNPC(e) {
     setNumCurr(numCurr+1);
     var npcKey = "npc" + numCurr;
@@ -81,7 +91,10 @@ export default function GenerateInfo() {
               <Button className="p-inputgroup-addon" label="Add Tavern" onClick={handleAddTavern} />
           </div>
           <div className="flex-auto">
-              <Button className="p-inputgroup-addon" label="Add NPC" onClick={handleAddNPC} />
+              <Button className="p-inputgroup-addon" label="Add Shop" severity="info" onClick={handleAddShop} />
+          </div>
+          <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Add NPC" severity="help" onClick={handleAddNPC} />
           </div>
         </div>  
       </div>

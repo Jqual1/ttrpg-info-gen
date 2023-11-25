@@ -83,3 +83,7 @@ body {
 .p-float-label input.p-filled ~ label {
   top: -0.5rem;
 }
+
+.p-float-label textarea.p-filled ~ label {
+  top: -0.5rem;
+}

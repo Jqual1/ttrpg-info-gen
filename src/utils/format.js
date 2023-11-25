@@ -8,7 +8,26 @@ export default function format(param) {
     if (input.type === 'tavern') {
         output = 
         `# (Tavern) ${input.tavernName}\n` +
-        `- **Comfort Level**: ${input.tavernComfort}\n`; 
+        `- **Comfort Level**: ${input.tavernComfort}\n` +
+        `- **Event**: ${input.event}\n` +
+        `- **Entertainment**: ${input.entertainment}\n` +
+        `- **Patron**: ${input.patron}\n` +
+        `- **Cocktail**: ${input.cocktail}\n` +
+        `- **Trouble**: ${input.trouble}\n` +
+        `- **Notable**: ${input.notable}\n`; 
+    } else if (input.type === 'shop') {
+        output = 
+        `# (Shop) ${input.product}\n` +
+        `- **Shop Type**: ${input.shopType}\n` +
+        `- **Size**: ${input.size}\n` +
+        `- **Owner**: ${input.owner}\n` +
+        `- **Shop Condition**: ${input.shopCondition}\n` +
+        `- **Merch Condition**: ${input.merchCondition}\n` +
+        `- **Supplier**: ${input.supplier}\n` +
+        `- **Priced**: ${input.priced}\n` +
+        `- **How Busy?**: ${input.busyOrNa}\n` +
+        `- **Point of Interest**: ${input.interest}\n`;
+
     } else if (input.type === 'npc') {
         if (input.parent === 'null') {
             output = '#'

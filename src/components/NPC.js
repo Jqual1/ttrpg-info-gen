@@ -22,6 +22,7 @@ export default function GenerateNPC(props) {
 
     const parent = props.props.parent;
     const key = `${props.props.parent}_${props.props.key}`;
+    // NPC Variables the user will see
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [personality, setPersonality] = useState('');
