@@ -16,8 +16,10 @@ export default function GenerateTavern(props) {
     const key = `${props.props.parent}_${props.props.key}`;
     const [tavernName, setTavernName] = useState('');
     const [comfort, setComfort] = useState('');
-    const [npcs, setNPCs] = useState([]);
+    // Tavern "Children" Stuff (NPCs)
     const [npcCurr, setNPCCurr] = useState(1);
+    const [npcs, setNPCs] = useState([]);
+    const [children, setChildren] = useState([]);
 
     useEffect(() => {
         handleTavern();
@@ -25,27 +27,29 @@ export default function GenerateTavern(props) {
 
     useEffect(() => {
       handleMakeJSON();
-    }, [tavernName, comfort])
+    }, [tavernName, comfort, children])
 
     const handleMakeJSON = () => {
       var json = {
         parent:         parent,
+        children:       children,
         type:           'tavern',
         tavernName:     tavernName, 
         tavernComfort:  comfort
       }
       sessionStorage.setItem(key, JSON.stringify(json))
-      console.log(JSON.parse(sessionStorage.getItem(key)));
   }
 
     function handleAddNPC(e) {
-        setNPCCurr(npcCurr+1);
-        var npcKey = "npc" + npcCurr;
-        console.log(npcKey);
-        var currNpc = {parent: key, key: npcKey}
-        setNPCs(prevNPCs => {
-          return [...prevNPCs, <GenerateNPC props={currNpc} />]
-        })
+      var npcKey = "npc" + npcCurr;
+      var currNpc = {parent: key, key: npcKey}
+      setNPCCurr(npcCurr+1);
+      setChildren(prevChildren => {
+        return [...prevChildren, `${key}_${npcKey}`]
+      })
+      setNPCs(prevNPCs => {
+        return [...prevNPCs, <GenerateNPC props={currNpc} />]
+      })
       }
 
     function randomNumber(options) {

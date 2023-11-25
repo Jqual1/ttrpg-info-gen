@@ -11,6 +11,14 @@ export default function GenerateNPC(props) {
     const RACE          = 3;
     const HAIRCOLOR     = 4;
     const EYECOLOR      = 5;
+    const EYETYPE       = 6;
+    const EARTYPE       = 7;
+    const MOUTHTYPE     = 8;
+    const NOSETYPE      = 9;
+    const JAWTYPE       = 10;
+    const HAIRTYPE      = 11;
+    const HEIGHT        = 13;
+    const BODYTYPE      = 14;
 
     const parent = props.props.parent;
     const key = `${props.props.parent}_${props.props.key}`;
@@ -20,6 +28,15 @@ export default function GenerateNPC(props) {
     const [race, setRace] = useState('');
     const [hairColor, setHairColor] = useState('');
     const [eyeColor, setEyeColor] = useState('');
+    const [eyeType, setEyeType] = useState('');
+    const [earType, setEarType] = useState('');
+    const [mouthType, setMouthType] = useState('');
+    const [noseType, setNoseType] = useState('');
+    const [jawType, setJawType] = useState('');
+    const [hairType, setHairType] = useState('');
+    const [height, setHeight] = useState('');
+    const [bodyType, setBodyType] = useState('');
+
     
     useEffect(() => {
         handleNPC();
@@ -27,7 +44,8 @@ export default function GenerateNPC(props) {
 
     useEffect(() => {
         handleMakeJSON();
-    }, [firstName, lastName, personality, race, hairColor, eyeColor])
+    }, [firstName, lastName, personality, race, hairColor, eyeColor,
+        eyeType, earType, mouthType, noseType, jawType, hairType, height, bodyType])
 
     function randomNumber(options) {
       // Get the number between 0 (inclusive) and max (exclusive) for an array
@@ -43,10 +61,17 @@ export default function GenerateNPC(props) {
             personality:    personality,
             race:           race,
             hairColor:      hairColor,
-            eyeColor:       eyeColor
+            eyeColor:       eyeColor,
+            eyeType:        eyeType,
+            earType:        earType,
+            mouthType:      mouthType,
+            noseType:       noseType,
+            jawType:        jawType,
+            hairType:       hairType,
+            height:         height,
+            bodyType:       bodyType,
         }
         sessionStorage.setItem(key, JSON.stringify(json));
-        console.log(JSON.parse(sessionStorage.getItem(key)));
     }
 
     // Runs the First Name Gen
@@ -64,19 +89,59 @@ export default function GenerateNPC(props) {
         setPersonality(npcData[PERSONALITY].roll[randomNumber(npcData[PERSONALITY].roll.length)]);
       }
 
-    // Runs the First Name Gen
+    // Runs the Race Gen
     const handleRace = () => {
         setRace(npcData[RACE].roll[randomNumber(npcData[RACE].roll.length)]);
     }
 
-    // Runs the First Name Gen
+    // Runs the Hair Color Gen
     const handleHairColor = () => {
         setHairColor(npcData[HAIRCOLOR].roll[randomNumber(npcData[HAIRCOLOR].roll.length)]);
       }
 
-    // Runs the First Name Gen
+    // Runs the Eye Color Gen
     const handleEyeColor = () => {
         setEyeColor(npcData[EYECOLOR].roll[randomNumber(npcData[EYECOLOR].roll.length)]);
+      }
+
+    // Runs the Eye Type Gen
+    const handleEyeType = () => {
+        setEyeType(npcData[EYETYPE].roll[randomNumber(npcData[EYETYPE].roll.length)]);
+      }
+
+    // Runs the Ear Type Gen
+    const handleEarType = () => {
+        setEarType(npcData[EARTYPE].roll[randomNumber(npcData[EARTYPE].roll.length)]);
+      }
+
+    // Runs the Mouth Type Gen
+    const handleMouthType = () => {
+        setMouthType(npcData[MOUTHTYPE].roll[randomNumber(npcData[MOUTHTYPE].roll.length)]);
+      }
+    
+    // Runs the Nose Type Gen
+    const handleNoseType = () => {
+        setNoseType(npcData[NOSETYPE].roll[randomNumber(npcData[NOSETYPE].roll.length)]);
+      }
+    
+    // Runs the Jaw Type Gen 
+    const handleJawType = () => {
+        setJawType(npcData[JAWTYPE].roll[randomNumber(npcData[JAWTYPE].roll.length)]);
+      }
+      
+    // Runs the Hair Type Gen
+    const handleHairType = () => {
+        setHairType(npcData[HAIRTYPE].roll[randomNumber(npcData[HAIRTYPE].roll.length)]);
+      }
+      
+    // Runs the Height Gen
+    const handleHeight = () => {
+        setHeight(npcData[HEIGHT].roll[randomNumber(npcData[HEIGHT].roll.length)]);
+      }
+      
+    // Runs the Body Type Gen 
+    const handleBodyType = () => {
+        setBodyType(npcData[BODYTYPE].roll[randomNumber(npcData[BODYTYPE].roll.length)]);
       }
 
     // Runs all NPC Generators
@@ -86,7 +151,15 @@ export default function GenerateNPC(props) {
         handlePersonality();
         handleRace();
         handleHairColor();
+        handleHairType();
         handleEyeColor();
+        handleEyeType();
+        handleEarType();
+        handleMouthType();
+        handleNoseType();
+        handleJawType();
+        handleHeight();
+        handleBodyType();
     };
   
     return (
@@ -113,19 +186,19 @@ export default function GenerateNPC(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handlePersonality}/>
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleRace}/>
                     <span className="p-float-label">
-                        <InputText id="personality" value={personality} onChange={(e) => setPersonality(e.target.value)} />
-                        <label htmlFor="personality">Personality</label>
+                        <InputText id="race" value={race} onChange={(e) => setRace(e.target.value)} />
+                        <label htmlFor="race">Race</label>
                     </span>
                 </div>
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleRace}/>
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handlePersonality}/>
                     <span className="p-float-label">
-                        <InputText id="race" value={race} onChange={(e) => setRace(e.target.value)} />
-                        <label htmlFor="race">Race</label>
+                        <InputText id="personality" value={personality} onChange={(e) => setPersonality(e.target.value)} />
+                        <label htmlFor="personality">Personality</label>
                     </span>
                 </div>
             </div>
@@ -140,10 +213,82 @@ export default function GenerateNPC(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleHairType}/>
+                    <span className="p-float-label">
+                        <InputText id="hairtype" value={hairType} onChange={(e) => setHairType(e.target.value)} />
+                        <label htmlFor="hairtype">Hair Type</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleEyeColor}/>
                     <span className="p-float-label">
                         <InputText id="eyecolor" value={eyeColor} onChange={(e) => setEyeColor(e.target.value)} />
                         <label htmlFor="eyecolor">Eye Color</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleEyeType}/>
+                    <span className="p-float-label">
+                        <InputText id="eyetype" value={eyeType} onChange={(e) => setEyeType(e.target.value)} />
+                        <label htmlFor="eyetype">Eye Type</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleEarType}/>
+                    <span className="p-float-label">
+                        <InputText id="eartype" value={earType} onChange={(e) => setEarType(e.target.value)} />
+                        <label htmlFor="eartype">Ear Type</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleMouthType}/>
+                    <span className="p-float-label">
+                        <InputText id="mouthtype" value={mouthType} onChange={(e) => setMouthType(e.target.value)} />
+                        <label htmlFor="mouthtype">Mouth Type</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleNoseType}/>
+                    <span className="p-float-label">
+                        <InputText id="nosetype" value={noseType} onChange={(e) => setNoseType(e.target.value)} />
+                        <label htmlFor="nosetype">Nose Type</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleJawType}/>
+                    <span className="p-float-label">
+                        <InputText id="jawtype" value={jawType} onChange={(e) => setJawType(e.target.value)} />
+                        <label htmlFor="jawtype">Jaw Type</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleHeight}/>
+                    <span className="p-float-label">
+                        <InputText id="height" value={height} onChange={(e) => setHeight(e.target.value)} />
+                        <label htmlFor="height">Height</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleBodyType}/>
+                    <span className="p-float-label">
+                        <InputText id="bodytype" value={bodyType} onChange={(e) => setBodyType(e.target.value)} />
+                        <label htmlFor="bodytype">Body Type</label>
                     </span>
                 </div>
             </div>
