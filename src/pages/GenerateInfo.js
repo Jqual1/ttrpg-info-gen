@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { saveAs } from 'file-saver';
 import { Button } from "primereact/button";
-import GenerateTavern from "../components/Tavern";
+import GenerateSettlement from "../components/Settlement";
 import GenerateShop from "../components/Shop";
+import GenerateTavern from "../components/Tavern";
 import GenerateNPC from "../components/NPC";
 import format from "../utils/format";
 
@@ -50,28 +51,37 @@ export default function GenerateInfo() {
   }
 
   // Generators
-  function handleAddTavern(e) {
+  function handleAddSettlement(e) {
     setNumCurr(numCurr+1);
-    var tavernKey = "tavern" + numCurr;
-    var currGen = {parent: "null", key: tavernKey}
+    var genKey = "settlement" + numCurr;
+    var currGen = {parent: "null", key: genKey}
     setGens(prevGens => {
-      return [...prevGens, [<div className="card">, <GenerateTavern props={currGen} />, </div>]]
+      return [...prevGens, [<div className="card">, <GenerateSettlement props={currGen} />, </div>]]
     })
   }
-
+  
   function handleAddShop(e) {
     setNumCurr(numCurr+1);
-    var shopKey = "shop" + numCurr;
-    var currGen = {parent: "null", key: shopKey}
+    var genKey = "shop" + numCurr;
+    var currGen = {parent: "null", key: genKey}
     setGens(prevGens => {
       return [...prevGens, [<div className="card">, <GenerateShop props={currGen} />, </div>]]
     })
   }
 
+  function handleAddTavern(e) {
+    setNumCurr(numCurr+1);
+    var genKey = "tavern" + numCurr;
+    var currGen = {parent: "null", key: genKey}
+    setGens(prevGens => {
+      return [...prevGens, [<div className="card">, <GenerateTavern props={currGen} />, </div>]]
+    })
+  }
+  
   function handleAddNPC(e) {
     setNumCurr(numCurr+1);
-    var npcKey = "npc" + numCurr;
-    var currGen = {parent: "null", key: npcKey}
+    var genKey = "npc" + numCurr;
+    var currGen = {parent: "null", key: genKey}
     setGens(prevGens => {
       return [...prevGens, [<div className="card">, <GenerateNPC props={currGen} />, </div>]]
     })
@@ -88,10 +98,13 @@ export default function GenerateInfo() {
             <Button className="p-inputgroup-addon" label="Export" onClick={formatExport} />
           </div>
           <div className="flex-auto">
-              <Button className="p-inputgroup-addon" label="Add Tavern" onClick={handleAddTavern} />
+              <Button className="p-inputgroup-addon" label="Add Settlement" severity="info" onClick={handleAddSettlement} />
           </div>
           <div className="flex-auto">
-              <Button className="p-inputgroup-addon" label="Add Shop" severity="info" onClick={handleAddShop} />
+              <Button className="p-inputgroup-addon" label="Add Shop" onClick={handleAddShop} />
+          </div>
+          <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Add Tavern" onClick={handleAddTavern} />
           </div>
           <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Add NPC" severity="help" onClick={handleAddNPC} />

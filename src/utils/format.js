@@ -9,17 +9,16 @@ export default function format(param) {
         output += '#';
     }
 
-    if (input.type === 'tavern') {
+
+    if (input.type === 'settlement') {
         output += 
-        ` (Tavern) ${input.tavernName}\n` +
-        `- **Comfort Level**: ${input.tavernComfort}\n` +
-        `- **Event**: ${input.event}\n` +
-        `- **Entertainment**: ${input.entertainment}\n` +
-        `- **Patron**: ${input.patron}\n` +
-        `- **Cocktail**: ${input.cocktail}\n` +
-        `- **Trouble**: ${input.trouble}\n` +
-        `- **Notable**: ${input.notable}\n`; 
-    } else if (input.type === 'shop') {
+        ` (Settlement) ${input.name}\n` +
+        `- **Population**: ${input.population}\n` +
+        `- **Inhabitants**: ${input.inhabitants}\n` +
+        `- **Atmosphere**: ${input.atmosphere}\n` +
+        `- **Prominent Feature**: ${input.promFeature}\n`;
+    }
+    if (input.type === 'shop') {
         output += 
         ` (Shop) ${input.product}\n` +
         `- **Shop Type**: ${input.shopType}\n` +
@@ -31,6 +30,16 @@ export default function format(param) {
         `- **Priced**: ${input.priced}\n` +
         `- **How Busy?**: ${input.busyOrNa}\n` +
         `- **Point of Interest**: ${input.interest}\n`;
+    } else if (input.type === 'tavern') {
+        output += 
+        ` (Tavern) ${input.tavernName}\n` +
+        `- **Comfort Level**: ${input.tavernComfort}\n` +
+        `- **Event**: ${input.event}\n` +
+        `- **Entertainment**: ${input.entertainment}\n` +
+        `- **Patron**: ${input.patron}\n` +
+        `- **Cocktail**: ${input.cocktail}\n` +
+        `- **Trouble**: ${input.trouble}\n` +
+        `- **Notable**: ${input.notable}\n`; 
 
     } else if (input.type === 'npc') {
         output +=

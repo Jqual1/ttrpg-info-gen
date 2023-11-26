@@ -165,7 +165,7 @@ export default function GenerateTavern(props) {
   
     return (
       <div>
-        <h1>Tavern/Inn Generator</h1> 
+        <h2>Tavern/Inn Generator</h2> 
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">
