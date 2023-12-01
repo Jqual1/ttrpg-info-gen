@@ -56,7 +56,7 @@ export default function GenerateInfo() {
     var genKey = "settlement" + numCurr;
     var currGen = {parent: "null", key: genKey}
     setGens(prevGens => {
-      return [...prevGens, [<div className="card">, <GenerateSettlement props={currGen} />, </div>]]
+      return [...prevGens, <GenerateSettlement props={currGen} />]
     })
   }
   
@@ -65,7 +65,7 @@ export default function GenerateInfo() {
     var genKey = "shop" + numCurr;
     var currGen = {parent: "null", key: genKey}
     setGens(prevGens => {
-      return [...prevGens, [<div className="card">, <GenerateShop props={currGen} />, </div>]]
+      return [...prevGens, <GenerateShop props={currGen} />]
     })
   }
 
@@ -74,7 +74,7 @@ export default function GenerateInfo() {
     var genKey = "tavern" + numCurr;
     var currGen = {parent: "null", key: genKey}
     setGens(prevGens => {
-      return [...prevGens, [<div className="card">, <GenerateTavern props={currGen} />, </div>]]
+      return [...prevGens, <GenerateTavern props={currGen} />]
     })
   }
   
@@ -83,12 +83,12 @@ export default function GenerateInfo() {
     var genKey = "npc" + numCurr;
     var currGen = {parent: "null", key: genKey}
     setGens(prevGens => {
-      return [...prevGens, [<div className="card">, <GenerateNPC props={currGen} />, </div>]]
+      return [...prevGens, <GenerateNPC props={currGen} />]
     })
   }
   
     return (
-      <div>
+      <div className="card">
         <div className="flex flex-wrap gap-3 p-fluid">
           <div className="flex-auto">{gens}</div>
           </div>

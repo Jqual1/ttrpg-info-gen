@@ -3,6 +3,7 @@ import { Button } from "primereact/button";
 import { tavernData } from "../data/tavern"
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
+import { Panel } from "primereact/panel";
 import GenerateNPC from "./NPC";
 
 export default function GenerateTavern(props) {
@@ -164,8 +165,7 @@ export default function GenerateTavern(props) {
     };
   
     return (
-      <div>
-        <h2>Tavern/Inn Generator</h2> 
+      <Panel header="Tavern/Inn Generator" toggleable>
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">
@@ -250,6 +250,6 @@ export default function GenerateTavern(props) {
                 <Button className="p-inputgroup-addon" label="Regenerate Tavern" onClick={handleTavern} />
             </div>
         </div>
-    </div>
+    </Panel>
     );
 }

@@ -3,6 +3,7 @@ import { Button } from "primereact/button";
 import { shopData } from "../data/shop"
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
+import { Panel } from "primereact/panel";
 import GenerateNPC from "./NPC";
 
 export default function GenerateShop(props) {
@@ -145,8 +146,7 @@ export default function GenerateShop(props) {
     };
   
     return (
-      <div>
-        <h2>Shop Generator</h2> 
+    <Panel header="Shop Generator" toggleable>
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">
@@ -249,6 +249,6 @@ export default function GenerateShop(props) {
                 <Button className="p-inputgroup-addon" label="Regenerate Shop" severity="info" onClick={handleShop} />
             </div>
         </div>
-    </div>
+    </Panel>
     );
 }

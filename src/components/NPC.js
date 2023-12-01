@@ -3,6 +3,8 @@ import { Button } from "primereact/button";
 import { npcData } from "../data/npcs"
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
+import { Panel } from "primereact/panel";
+
 
 export default function GenerateNPC(props) {
     const FIRST         = 0;
@@ -164,8 +166,7 @@ export default function GenerateNPC(props) {
     };
   
     return (
-    <div>
-        <h3>NPC Generator</h3>
+    <Panel header="NPC Generator" toggleable>
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">
@@ -297,6 +298,6 @@ export default function GenerateNPC(props) {
                 <Button className="p-inputgroup-addon" label="Regenerate NPC" severity="help" onClick={handleNPC} />
             </div>
         </div>
-      </div>
+      </Panel>
     );
 }
