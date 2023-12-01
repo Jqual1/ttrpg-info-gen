@@ -130,7 +130,7 @@ export default function GenerateSettlement(props) {
     };
   
     return (
-      <Panel header="Settlement Generator" toggleable>
+      <Panel header={name + " (Settlement Generator)"} toggleable>
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">
