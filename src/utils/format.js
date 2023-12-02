@@ -16,7 +16,8 @@ export default function format(param) {
         `- **Population**: ${input.population}\n` +
         `- **Inhabitants**: ${input.inhabitants}\n` +
         `- **Atmosphere**: ${input.atmosphere}\n` +
-        `- **Prominent Feature**: ${input.promFeature}\n`;
+        `- **Prominent Feature**: ${input.promFeature}\n` +
+        `- **Possible Reason To Stay**: ${input.plotHook}\n`;
     }
     if (input.type === 'shop') {
         output += 

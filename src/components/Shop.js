@@ -32,8 +32,8 @@ export default function GenerateShop(props) {
     const [busyOrNa, setBusyOrNa] = useState('');
     const [interest, setInterest] = useState('');
     // Shop "Children" Stuff (NPCs)
-    const [npcCurr, setNPCCurr] = useState(1);
-    const [npcs, setNPCs] = useState([]);
+    const [numCurr, setNumCurr] = useState(1);
+    const [gens, setGens] = useState([]);
     const [children, setChildren] = useState([]);
 
     useEffect(() => {
@@ -64,15 +64,27 @@ export default function GenerateShop(props) {
       sessionStorage.setItem(key, JSON.stringify(json))
   }
 
+  // Handle Remove of This Gen
+  const handleRemoveThis = () => {
+    props.props.handleRemove(key);
+  }
+
+  // Handle Removal of childGen
+  function handleRemoveChild(key) { 
+    setGens(current => current.filter(gen => gen.key !== key));
+    setChildren(current => current.filter(child => child !== key));
+    sessionStorage.removeItem(key);
+   }
+
     function handleAddNPC(e) {
-      var npcKey = "npc" + npcCurr;
-      var currNpc = {parent: key, key: npcKey}
-      setNPCCurr(npcCurr+1);
+      setNumCurr(numCurr+1);
+      var genKey = "npc" + numCurr;
+      var currGen = {parent: key, key: genKey, handleRemove: handleRemoveChild}
       setChildren(prevChildren => {
-        return [...prevChildren, `${key}_${npcKey}`]
+        return [...prevChildren, `${key}_${genKey}`]
       })
-      setNPCs(prevNPCs => {
-        return [...prevNPCs, <GenerateNPC props={currNpc} />]
+      setGens(prevNPCs => {
+        return [...prevNPCs, <GenerateNPC key={`${key}_${genKey}`} props={currGen} />]
       })
       }
 
@@ -238,7 +250,7 @@ export default function GenerateShop(props) {
                     </span>
                 </div>
             </div>
-            <div className="flex-auto">{npcs}</div>
+            <div className="flex-auto">{gens}</div>
         </div>
         <br></br>
         <div className="flex flex-wrap gap-3 p-fluid">
@@ -247,6 +259,9 @@ export default function GenerateShop(props) {
             </div>
             <div className="flex-auto">
                 <Button className="p-inputgroup-addon" label="Regenerate Shop" severity="info" onClick={handleShop} />
+            </div>
+            <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />
             </div>
         </div>
     </Panel>

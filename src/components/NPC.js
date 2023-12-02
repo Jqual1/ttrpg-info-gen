@@ -77,6 +77,18 @@ export default function GenerateNPC(props) {
         sessionStorage.setItem(key, JSON.stringify(json));
     }
 
+    // Handle Remove of This Gen
+    const handleRemoveThis = () => {
+        props.props.handleRemove(key);
+      }
+  
+      // Handle Removal of childGen
+      //function handleRemoveChild(key) { 
+      //  setGens(current => current.filter(gen => gen.key !== key));
+      //  setChildren(current => current.filter(child => child !== key));
+      //  sessionStorage.removeItem(key);
+      // }
+
     // Runs the First Name Gen
     const handleFirstName = () => {
         setFirstName(npcData[FIRST].roll[randomNumber(npcData[FIRST].roll.length)]);
@@ -296,6 +308,9 @@ export default function GenerateNPC(props) {
             </div>
             <div className="flex-auto">
                 <Button className="p-inputgroup-addon" label="Regenerate NPC" severity="help" onClick={handleNPC} />
+            </div>
+            <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />
             </div>
         </div>
       </Panel>

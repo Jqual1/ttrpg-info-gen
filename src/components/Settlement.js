@@ -15,6 +15,7 @@ export default function GenerateSettlement(props) {
     const INHABI    = 3;
     const ATMOS     = 4;
     const FEATURE   = 5;
+    const HOOK      = 6;
 
     const parent = props.props.parent;
     const key = `${props.props.parent}_${props.props.key}`;
@@ -24,6 +25,7 @@ export default function GenerateSettlement(props) {
     const [inhabitants, setInhabitants] = useState('');
     const [atmosphere, setAtmosphere] = useState('');
     const [promFeature, setPromFeature] = useState('');
+    const [plotHook, setPlotHook] = useState('');
     // Settlement "Children" Stuff (NPCs)
     const [numCurr, setNumCurr] = useState(1);
     const [gens, setGens] = useState([]);
@@ -35,7 +37,7 @@ export default function GenerateSettlement(props) {
 
     useEffect(() => {
       handleMakeJSON();
-    }, [name, population, inhabitants, atmosphere, promFeature, children])
+    }, [name, population, inhabitants, atmosphere, promFeature, plotHook, children])
 
     // Makes and Adds JSON to sessionStorage
     const handleMakeJSON = () => {
@@ -47,44 +49,45 @@ export default function GenerateSettlement(props) {
         population:     population,
         inhabitants:    inhabitants,
         atmosphere:     atmosphere,
-        promFeature:    promFeature
+        promFeature:    promFeature,
+        plotHook:       plotHook,
       }
       sessionStorage.setItem(key, JSON.stringify(json))
   }
 
   function handleAddShop(e) {
     var genKey = "shop" + numCurr;
-    var currGen = {parent: key, key: genKey}
+    var currGen = {parent: key, key: genKey, handleRemove: handleRemoveChild}
     setNumCurr(numCurr+1);
     setChildren(prevChildren => {
       return [...prevChildren, `${key}_${genKey}`]
     })
     setGens(prevGens => {
-      return [...prevGens, <GenerateShop props={currGen} />]
+      return [...prevGens, <GenerateShop key={`${key}_${genKey}`} props={currGen} />]
     })
     }
 
     function handleAddTavern(e) {
         var genKey = "tavern" + numCurr;
-        var currGen = {parent: key, key: genKey}
+        var currGen = {parent: key, key: genKey, handleRemove: handleRemoveChild}
         setNumCurr(numCurr+1);
         setChildren(prevChildren => {
           return [...prevChildren, `${key}_${genKey}`]
         })
         setGens(prevGens => {
-          return [...prevGens, <GenerateTavern props={currGen} />]
+          return [...prevGens, <GenerateTavern key={`${key}_${genKey}`} props={currGen} />]
         })
         }
 
     function handleAddNPC(e) {
       var genKey = "npc" + numCurr;
-      var currGen = {parent: key, key: genKey}
+      var currGen = {parent: key, key: genKey, handleRemove: handleRemoveChild}
       setNumCurr(numCurr+1);
       setChildren(prevChildren => {
         return [...prevChildren, `${key}_${genKey}`]
       })
       setGens(prevGens => {
-        return [...prevGens, <GenerateNPC props={currGen} />]
+        return [...prevGens, <GenerateNPC key={`${key}_${genKey}`} props={currGen} />]
       })
       }
 
@@ -92,6 +95,18 @@ export default function GenerateSettlement(props) {
       // Get the number between 0 (inclusive) and max (exclusive) for an array
       return (Math.floor(Math.random() * (options)));
     }
+
+    // Handle Remove of This Gen
+    const handleRemoveThis = () => {
+      props.props.handleRemove(key);
+    }
+
+    // Handle Removal of childGen
+    function handleRemoveChild(key) { 
+      setGens(current => current.filter(gen => gen.key !== key));
+      setChildren(current => current.filter(child => child !== key));
+      sessionStorage.removeItem(key);
+     }
 
     // Runs the Settlement Name Generator
     const handleName = () => {
@@ -119,6 +134,10 @@ export default function GenerateSettlement(props) {
       setPromFeature(settlementData[FEATURE].roll[randomNumber(settlementData[FEATURE].roll.length)]);
     }
 
+    // Runs the Plot Hook Generator
+    const handlePlotHook = () => {
+      setPlotHook(settlementData[HOOK].roll[randomNumber(settlementData[HOOK].roll.length)]);
+    }
 
     // Runs all Settlement Generators
     const handleSettlement = () => {
@@ -127,6 +146,7 @@ export default function GenerateSettlement(props) {
       handleInhabitants();
       handleAtmosphere();
       handlePromFeature();
+      handlePlotHook();
     };
   
     return (
@@ -177,6 +197,15 @@ export default function GenerateSettlement(props) {
                     </span>
                 </div>
             </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handlePlotHook} />
+                    <span className="p-float-label">
+                        <InputText id="plotHook" value={plotHook} onChange={(e) => setPlotHook(e.target.value)} />
+                        <label htmlFor="plotHook">Reason To Stay</label>
+                    </span>
+                </div>
+            </div>
             <div className="flex-auto">{gens}</div>
         </div>
         <br></br>
@@ -193,7 +222,10 @@ export default function GenerateSettlement(props) {
             <div className="flex-auto">
                 <Button className="p-inputgroup-addon" label="Regenerate Town" severity="info" onClick={handleSettlement} />
             </div>
+            <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />
+            </div>
         </div>
     </Panel>
     );
-}
+  }

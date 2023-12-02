@@ -21,8 +21,7 @@ export default function GenerateInfo() {
   // Export Functions
   function exportData() {
     const blob = new Blob(data, { type: "text/plain" });
-    console.log(data);
-    saveAs(blob, "test.md")
+    saveAs(blob, "TTRPGInfoGenOutput.md")
   }
 
   const formatExport = async () => {
@@ -50,40 +49,46 @@ export default function GenerateInfo() {
     return true;
   }
 
+  // Remove Generator
+  function handleRemoveChild(key) { 
+    setGens(current => current.filter(gen => gen.key !== key));
+    sessionStorage.removeItem(key);
+   }
+
   // Generators
   function handleAddSettlement(e) {
     setNumCurr(numCurr+1);
     var genKey = "settlement" + numCurr;
-    var currGen = {parent: "null", key: genKey}
+    var currGen = {parent: "null", key: genKey, handleRemove: handleRemoveChild}
     setGens(prevGens => {
-      return [...prevGens, <GenerateSettlement props={currGen} />]
+      return [...prevGens, <GenerateSettlement key={`null_${genKey}`} props={currGen} />]
     })
   }
   
   function handleAddShop(e) {
     setNumCurr(numCurr+1);
     var genKey = "shop" + numCurr;
-    var currGen = {parent: "null", key: genKey}
+    var currGen = {parent: "null", key: genKey, handleRemove: handleRemoveChild}
     setGens(prevGens => {
-      return [...prevGens, <GenerateShop props={currGen} />]
+      return [...prevGens, <GenerateShop key={`null_${genKey}`} props={currGen} />]
     })
   }
 
   function handleAddTavern(e) {
     setNumCurr(numCurr+1);
     var genKey = "tavern" + numCurr;
-    var currGen = {parent: "null", key: genKey}
+    var currGen = {parent: "null", key: genKey, handleRemove: handleRemoveChild}
     setGens(prevGens => {
-      return [...prevGens, <GenerateTavern props={currGen} />]
+      return [...prevGens, <GenerateTavern key={`null_${genKey}`} props={currGen} />]
     })
   }
   
   function handleAddNPC(e) {
     setNumCurr(numCurr+1);
     var genKey = "npc" + numCurr;
-    var currGen = {parent: "null", key: genKey}
+    var currGen = {parent: "null", key: genKey, handleRemove: handleRemoveChild}
     setGens(prevGens => {
-      return [...prevGens, <GenerateNPC props={currGen} />]
+      return [...prevGens, <GenerateNPC key={`null_${genKey}`} props={currGen} />]
     })
   }
   

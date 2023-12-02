@@ -31,8 +31,8 @@ export default function GenerateTavern(props) {
     const [trouble, setTrouble] = useState('');
     const [notable, setNotable] = useState('');
     // Tavern "Children" Stuff (NPCs)
-    const [npcCurr, setNPCCurr] = useState(1);
-    const [npcs, setNPCs] = useState([]);
+    const [numCurr, setNumCurr] = useState(1);
+    const [gens, setGens] = useState([]);
     const [children, setChildren] = useState([]);
 
     useEffect(() => {
@@ -61,17 +61,29 @@ export default function GenerateTavern(props) {
       sessionStorage.setItem(key, JSON.stringify(json))
   }
 
-    function handleAddNPC(e) {
-      var npcKey = "npc" + npcCurr;
-      var currNpc = {parent: key, key: npcKey}
-      setNPCCurr(npcCurr+1);
-      setChildren(prevChildren => {
-        return [...prevChildren, `${key}_${npcKey}`]
-      })
-      setNPCs(prevNPCs => {
-        return [...prevNPCs, <GenerateNPC props={currNpc} />]
-      })
-      }
+  // Handle Remove of This Gen
+  const handleRemoveThis = () => {
+    props.props.handleRemove(key);
+  }
+
+  // Handle Removal of childGen
+  function handleRemoveChild(key) { 
+    setGens(current => current.filter(gen => gen.key !== key));
+    setChildren(current => current.filter(child => child !== key));
+    sessionStorage.removeItem(key);
+   }
+
+   function handleAddNPC(e) {
+    setNumCurr(numCurr+1);
+    var genKey = "npc" + numCurr;
+    var currGen = {parent: key, key: genKey, handleRemove: handleRemoveChild}
+    setChildren(prevChildren => {
+      return [...prevChildren, `${key}_${genKey}`]
+    })
+    setGens(prevNPCs => {
+      return [...prevNPCs, <GenerateNPC key={`${key}_${genKey}`} props={currGen} />]
+    })
+    }
 
     function randomNumber(options) {
       // Get the number between 0 (inclusive) and max (exclusive) for an array
@@ -239,7 +251,7 @@ export default function GenerateTavern(props) {
                     </span>
                 </div>
             </div>
-            <div className="flex-auto">{npcs}</div>
+            <div className="flex-auto">{gens}</div>
         </div>
         <br></br>
         <div className="flex flex-wrap gap-3 p-fluid">
@@ -248,6 +260,9 @@ export default function GenerateTavern(props) {
             </div>
             <div className="flex-auto">
                 <Button className="p-inputgroup-addon" label="Regenerate Tavern" onClick={handleTavern} />
+            </div>
+            <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />
             </div>
         </div>
     </Panel>
