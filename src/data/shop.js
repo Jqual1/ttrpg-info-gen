@@ -50,7 +50,7 @@ export const shopData = [
         "Beauty and hygiene supplies",
         "Magical creatures",
         "Wagon wheels",   ]},
-        {"title": "d10 The shop's type is...", "id":"d10theshopstypeis_shops", "roll":[
+    {"title": "d10 The shop's type is...", "id":"d10theshopstypeis_shops", "roll":[
         "A building in a merchant district",
         "Attached to the merchant's home",
         "A wagon pulled by a horse or ox team",
@@ -61,7 +61,7 @@ export const shopData = [
         "A merchant caravan",
         "In a place only accessibly by magic",
         "A franchise. The shop can be found in multiple places",   ]},
-        {"title": "d12 The shop is owned by...", "id":"d12theshopisownedby_shops", "roll":[
+    {"title": "d12 The shop is owned by...", "id":"d12theshopisownedby_shops", "roll":[
         "A beady-eyed accountant",
         "A guild leader",
         "A noble",
@@ -74,28 +74,28 @@ export const shopData = [
         "An oppressive brute",
         "An old crone",
         "A lazy half-orc",   ]},
-        {"title": "d6 The shop's condition is...", "id":"d6theshopsconditionis_shops", "roll":[
+    {"title": "d6 The shop's condition is...", "id":"d6theshopsconditionis_shops", "roll":[
         "Brand new. Everything has a place, and is in its place",
         "Well maintained. It is cleaned regularly",
         "Average. A little dusty",
         "Unkempt. Bugs and rodents scurry away from your footsteps",
         "Dark. There is no natural light. Only a candle or two light the shop",
         "Decrepit. The building should be condemned",   ]},
-        {"title": "d6 The condition of the merchandise is...", "id":"d6theconditionofthemerchandiseis_shops", "roll":[
+    {"title": "d6 The condition of the merchandise is...", "id":"d6theconditionofthemerchandiseis_shops", "roll":[
         "Pristine. Kept in the best possible condition",
         "Cleaned regularly",
         "Mixed. Some items look new, while some look like they have been there a long time",
         "Dusty and dirty",
         "Falling apart",
         "Ancient",   ]},
-        {"title": "d6 The shop gets its supplies from...", "id":"d6theshopgetsitssuppliesfrom_shops", "roll":[
+    {"title": "d6 The shop gets its supplies from...", "id":"d6theshopgetsitssuppliesfrom_shops", "roll":[
         "They are crafted or attained by the merchant himself",
         "They are crafted or attained by the merchant's apprentices",
         "The merchant's business partner",
         "They are crafted elsewhere in bulk, and sold in the shop",
         "They are purchased from other people in town and resold",
         "No one knows, and no one asks",   ]},
-        {"title": "d8 The items are priced...", "id":"d8theitemsarepriced_shops", "roll":[
+    {"title": "d8 The items are priced...", "id":"d8theitemsarepriced_shops", "roll":[
         "Fairly",
         "Below value",
         "Above value",
@@ -104,18 +104,18 @@ export const shopData = [
         "\"Other\" means of payment are encouraged",
         "Based on the merchant's mood",
         "Based on how much the merchant thinks the customer needs it.",   ]},
-        {"title": "d5 The shop's size is...", "id":"d5theshopssizeis_shops", "roll":[
+    {"title": "d5 The shop's size is...", "id":"d5theshopssizeis_shops", "roll":[
         "Giant. Multiple rooms",
         "Large. One big room",
         "Average. One room big enough to hold what is needed",
         "Small. The room feels cluttered",
         "Tiny. The merchant practically operates out of a pack",   ]},
-        {"title": "d4 How busy is the shop...", "id":"d4howbusyistheshop_shops", "roll":[
+    {"title": "d4 How busy is the shop...", "id":"d4howbusyistheshop_shops", "roll":[
         "It's one of the most popular places to visit",
         "A few people mill in and out of the shop",
         "Not very busy. You are the only people there",
         "It rarely sees a customer",   ]},
-        {"title": "d50 Something interesting you find...", "id":"d50somethinginterestingyoufind_shops", "roll":[
+    {"title": "d50 Something interesting you find...", "id":"d50somethinginterestingyoufind_shops", "roll":[
         "The shopkeeper lives in a room attached to the shop",
         "There is a secret room in the back to sell illicit wares",
         "The shopkeeper does not seem to belong there",

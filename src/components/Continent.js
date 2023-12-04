@@ -23,6 +23,9 @@ export default function GenerateContinent(props) {
     const I_CREATURES   = 29;
     const D_PLANTS      = 30;
     const I_PLANTS      = 31;
+    const MINERAL       = 42;
+    const CATACLYSM     = 44;
+    const LAND_TYPE     = 45;
 
     const parent = props.props.parent;
     const key = `${props.props.parent}_${props.props.key}`;
@@ -170,7 +173,16 @@ export default function GenerateContinent(props) {
       }
       
     const handleUnique = () => {
-        setUnique(settlementData[UNIQUE].roll[randomNumber(settlementData[UNIQUE].roll.length)]);
+      var num = randomNumber(settlementData[UNIQUE].roll.length);
+      if (num === 0) {
+        setUnique("It is the only place to find the rare mineral " + settlementData[MINERAL].roll[randomNumber(settlementData[MINERAL].roll.length)]);
+      } else if (num === 1) {
+        setUnique(settlementData[CATACLYSM].roll[randomNumber(settlementData[CATACLYSM].roll.length)]);
+      } else if (num === 2) {
+        setUnique("It is dominated by " + settlementData[LAND_TYPE].roll[randomNumber(settlementData[LAND_TYPE].roll.length)]);
+      } else {
+        setUnique(settlementData[UNIQUE].roll[num]);
+      }
       }
       
     const handleDiscovery = () => {
@@ -217,7 +229,7 @@ export default function GenerateContinent(props) {
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleName} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleName} />
                     <span className="p-float-label">
                         <InputText id="name" value={name} onChange={(e) => setName(e.target.value)} />
                         <label htmlFor="name">Continent Name</label>
@@ -226,16 +238,7 @@ export default function GenerateContinent(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleSize} />
-                    <span className="p-float-label">
-                        <InputText id="size" value={size} onChange={(e) => setSize(e.target.value)} />
-                        <label htmlFor="size">Size</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleLocation} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleLocation} />
                     <span className="p-float-label">
                         <InputText id="location" value={location} onChange={(e) => setLocation(e.target.value)} />
                         <label htmlFor="location">Location</label>
@@ -244,7 +247,7 @@ export default function GenerateContinent(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleClimates} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleClimates} />
                     <span className="p-float-label">
                         <InputText id="climates" value={climates} onChange={(e) => setClimates(e.target.value)} />
                         <label htmlFor="climates">Climates</label>
@@ -253,34 +256,7 @@ export default function GenerateContinent(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleUnique} />
-                    <span className="p-float-label">
-                        <InputText id="unique" value={unique} onChange={(e) => setUnique(e.target.value)} />
-                        <label htmlFor="unique">Unique</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleDiscovery} />
-                    <span className="p-float-label">
-                        <InputText id="discovery" value={discovery} onChange={(e) => setDiscovery(e.target.value)} />
-                        <label htmlFor="discovery">Discovery</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleDiscoverer} />
-                    <span className="p-float-label">
-                        <InputText id="discoverer" value={discoverer} onChange={(e) => setDiscoverer(e.target.value)} />
-                        <label htmlFor="discoverer">Discoverer</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleDCreatures} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleDCreatures} />
                     <span className="p-float-label">
                         <InputText id="dCreatures" value={dCreatures} onChange={(e) => setDCreatures(e.target.value)} />
                         <label htmlFor="dCreatures">Domestic Creatures</label>
@@ -289,7 +265,7 @@ export default function GenerateContinent(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleICreatures} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleICreatures} />
                     <span className="p-float-label">
                         <InputText id="iCreatures" value={iCreatures} onChange={(e) => setICreatures(e.target.value)} />
                         <label htmlFor="iCreatures">Imported Creatures</label>
@@ -298,7 +274,7 @@ export default function GenerateContinent(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleDPlants} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleDPlants} />
                     <span className="p-float-label">
                         <InputText id="dPlants" value={dPlants} onChange={(e) => setDPlants(e.target.value)} />
                         <label htmlFor="dPlants">Domestic Plants</label>
@@ -307,10 +283,46 @@ export default function GenerateContinent(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleIPlants} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleIPlants} />
                     <span className="p-float-label">
                         <InputText id="iPlants" value={iPlants} onChange={(e) => setIPlants(e.target.value)} />
                         <label htmlFor="iPlants">Imported Plants</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleSize} />
+                    <span className="p-float-label">
+                        <InputTextarea id="size" value={size} onChange={(e) => setSize(e.target.value)} />
+                        <label htmlFor="size">Size</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleUnique} />
+                    <span className="p-float-label">
+                        <InputTextarea id="unique" value={unique} onChange={(e) => setUnique(e.target.value)} />
+                        <label htmlFor="unique">Unique</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleDiscovery} />
+                    <span className="p-float-label">
+                        <InputTextarea id="discovery" value={discovery} onChange={(e) => setDiscovery(e.target.value)} />
+                        <label htmlFor="discovery">Discovery</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleDiscoverer} />
+                    <span className="p-float-label">
+                        <InputTextarea id="discoverer" value={discoverer} onChange={(e) => setDiscoverer(e.target.value)} />
+                        <label htmlFor="discoverer">Discoverer</label>
                     </span>
                 </div>
             </div>
@@ -327,10 +339,10 @@ export default function GenerateContinent(props) {
         <br></br>
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Add Nation" onClick={handleAddNation} />
+                <Button className="p-inputgroup-addon" label="Add Nation" severity="help" onClick={handleAddNation} />
             </div>
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Add Settlement" onClick={handleAddSettlement} />
+                <Button className="p-inputgroup-addon" label="Add Settlement" severity="info" onClick={handleAddSettlement} />
             </div>
             <div className="flex-auto">
                 <Button className="p-inputgroup-addon" label="Add Shop" onClick={handleAddShop} />
@@ -342,7 +354,7 @@ export default function GenerateContinent(props) {
                 <Button className="p-inputgroup-addon" label="Add NPC" severity="help" onClick={handleAddNPC} />
             </div>
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Regenerate Continent" severity="info" onClick={handleContinent} />
+                <Button className="p-inputgroup-addon" label="Regenerate Continent" onClick={handleContinent} />
             </div>
             <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />

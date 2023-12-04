@@ -173,10 +173,10 @@ export default function GenerateShop(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleShopType} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleOwner} />
                     <span className="p-float-label">
-                        <InputText id="shopType" value={shopType} onChange={(e) => setShopType(e.target.value)} />
-                        <label htmlFor="shopType">Shop Type</label>
+                        <InputText id="owner" value={owner} onChange={(e) => setOwner(e.target.value)} />
+                        <label htmlFor="owner">Owner</label>
                     </span>
                 </div>
             </div>
@@ -191,10 +191,10 @@ export default function GenerateShop(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleOwner} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleShopType} />
                     <span className="p-float-label">
-                        <InputText id="owner" value={owner} onChange={(e) => setOwner(e.target.value)} />
-                        <label htmlFor="owner">Owner</label>
+                        <InputTextarea id="shopType" value={shopType} onChange={(e) => setShopType(e.target.value)} />
+                        <label htmlFor="shopType">Shop Type</label>
                     </span>
                 </div>
             </div>
@@ -202,7 +202,7 @@ export default function GenerateShop(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleShopCondition} />
                     <span className="p-float-label">
-                        <InputText id="shopCondition" value={shopCondition} onChange={(e) => setShopCondition(e.target.value)} />
+                        <InputTextarea id="shopCondition" value={shopCondition} onChange={(e) => setShopCondition(e.target.value)} />
                         <label htmlFor="shopCondition">Shop Condition</label>
                     </span>
                 </div>
@@ -211,7 +211,7 @@ export default function GenerateShop(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleMerchCondition} />
                     <span className="p-float-label">
-                        <InputText id="merchCondition" value={merchCondition} onChange={(e) => setMerchCondition(e.target.value)} />
+                        <InputTextarea id="merchCondition" value={merchCondition} onChange={(e) => setMerchCondition(e.target.value)} />
                         <label htmlFor="merchCondition">Merch Condition</label>
                     </span>
                 </div>
@@ -220,7 +220,7 @@ export default function GenerateShop(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleSupplier} />
                     <span className="p-float-label">
-                        <InputText id="supplier" value={supplier} onChange={(e) => setSupplier(e.target.value)} />
+                        <InputTextarea id="supplier" value={supplier} onChange={(e) => setSupplier(e.target.value)} />
                         <label htmlFor="supplier">Supplier</label>
                     </span>
                 </div>
@@ -229,7 +229,7 @@ export default function GenerateShop(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handlePriced} />
                     <span className="p-float-label">
-                        <InputText id="priced" value={priced} onChange={(e) => setPriced(e.target.value)} />
+                        <InputTextarea id="priced" value={priced} onChange={(e) => setPriced(e.target.value)} />
                         <label htmlFor="priced">Priced</label>
                     </span>
                 </div>
@@ -238,7 +238,7 @@ export default function GenerateShop(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleBusyOrNa} />
                     <span className="p-float-label">
-                        <InputText id="busyOrNa" value={busyOrNa} onChange={(e) => setBusyOrNa(e.target.value)} />
+                        <InputTextarea id="busyOrNa" value={busyOrNa} onChange={(e) => setBusyOrNa(e.target.value)} />
                         <label htmlFor="busyOrNa">How Busy?</label>
                     </span>
                 </div>
@@ -247,7 +247,7 @@ export default function GenerateShop(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleInterest} />
                     <span className="p-float-label">
-                        <InputText id="interest" value={interest} onChange={(e) => setInterest(e.target.value)} />
+                        <InputTextarea id="interest" value={interest} onChange={(e) => setInterest(e.target.value)} />
                         <label htmlFor="interest">Point of Interest</label>
                     </span>
                 </div>
@@ -268,7 +268,7 @@ export default function GenerateShop(props) {
                 <Button className="p-inputgroup-addon" label="Add NPC" severity="help" onClick={handleAddNPC} />
             </div>
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Regenerate Shop" severity="info" onClick={handleShop} />
+                <Button className="p-inputgroup-addon" label="Regenerate Shop" onClick={handleShop} />
             </div>
             <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />

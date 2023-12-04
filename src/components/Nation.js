@@ -24,7 +24,6 @@ export default function GenerateNation(props) {
     const RELIGION          = 16;
     const NOTABLE_LAW       = 17;
     const LANGUAGE          = 18;
-    const XENOPHOBIA        = 19;
     const CLASS_SYSTEM      = 20;
     const OUTCASTS          = 21;
 
@@ -44,7 +43,6 @@ export default function GenerateNation(props) {
     const [religion, setReligion] = useState('');
     const [notableLaw, setNotableLaw] = useState('');
     const [language, setLanguage] = useState('');
-    const [xenophobia, setXenophobia] = useState('');
     const [classSystem, setClassSystem] = useState('');
     const [outcasts, setOutcasts] = useState('');
     const [notes, setNotes] = useState('');
@@ -61,7 +59,7 @@ export default function GenerateNation(props) {
       handleMakeJSON();
     }, [name, age, politics, economics, ruler, unique, founder, divisions,
         citizenMood, citizenWealth, religion, notableLaw, language,
-        xenophobia, classSystem, outcasts, notes, children])
+        classSystem, outcasts, notes, children])
 
     // Makes and Adds JSON to sessionStorage
     const handleMakeJSON = () => {
@@ -82,7 +80,6 @@ export default function GenerateNation(props) {
         religion:       religion,
         notableLaw:     notableLaw,
         language:       language,
-        xenophobia:     xenophobia,
         classSystem:    classSystem,
         outcasts:       outcasts,
         notes:          notes
@@ -218,12 +215,19 @@ export default function GenerateNation(props) {
       
     // Runs the Language Generator
     const handleLanguage = () => {
-        setLanguage(settlementData[LANGUAGE].roll[randomNumber(settlementData[LANGUAGE].roll.length)]);
-      }
-      
-    // Runs the Xenophobia Generator
-    const handleXenophobia = () => {
-        setXenophobia(settlementData[XENOPHOBIA].roll[randomNumber(settlementData[XENOPHOBIA].roll.length)]);
+        var num = randomNumber(settlementData[LANGUAGE].roll.length);
+        if (num === 0) {
+            setLanguage("Common and " + settlementData[LANGUAGE].roll[randomNumber(settlementData[LANGUAGE].roll.length-3)+3])
+        } else if (num === 1) {
+            var lang1 = randomNumber(settlementData[LANGUAGE].roll.length-2)+2;
+            var lang2 = randomNumber(settlementData[LANGUAGE].roll.length-2)+2;
+            while (lang1 === lang2) {
+                lang2 = randomNumber(settlementData[LANGUAGE].roll.length-2)+2
+            }
+            setLanguage(settlementData[LANGUAGE].roll[lang1] + " and " + settlementData[LANGUAGE].roll[lang2])
+        } else {
+            setLanguage(settlementData[LANGUAGE].roll[num]);
+        }
       }
       
     // Runs the ClassSystem Generator
@@ -251,7 +255,6 @@ export default function GenerateNation(props) {
       handleReligion();
       handleNotableLaw();
       handleLanguage();
-      handleXenophobia();
       handleClassSystem();
       handleOutcasts();
     };
@@ -261,7 +264,7 @@ export default function GenerateNation(props) {
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleName} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleName} />
                     <span className="p-float-label">
                         <InputText id="name" value={name} onChange={(e) => setName(e.target.value)} />
                         <label htmlFor="name">Nation Name</label>
@@ -270,124 +273,16 @@ export default function GenerateNation(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleAge} />
-                    <span className="p-float-label">
-                        <InputText id="age" value={age} onChange={(e) => setAge(e.target.value)} />
-                        <label htmlFor="age">Age</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handlePolitics} />
-                    <span className="p-float-label">
-                        <InputText id="politics" value={politics} onChange={(e) => setPolitics(e.target.value)} />
-                        <label htmlFor="politics">Politics</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleEconomics} />
-                    <span className="p-float-label">
-                        <InputText id="economics" value={economics} onChange={(e) => setEconomics(e.target.value)} />
-                        <label htmlFor="economics">Economics</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleRuler} />
-                    <span className="p-float-label">
-                        <InputText id="ruler" value={ruler} onChange={(e) => setRuler(e.target.value)} />
-                        <label htmlFor="ruler">Ruler</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleFounder} />
-                    <span className="p-float-label">
-                        <InputText id="founder" value={founder} onChange={(e) => setFounder(e.target.value)} />
-                        <label htmlFor="founder">Founder</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleUnique} />
-                    <span className="p-float-label">
-                        <InputText id="unique" value={unique} onChange={(e) => setUnique(e.target.value)} />
-                        <label htmlFor="unique">Unique Characteristic</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleDivisions} />
-                    <span className="p-float-label">
-                        <InputText id="divisions" value={divisions} onChange={(e) => setDivisions(e.target.value)} />
-                        <label htmlFor="divisions">Divisions</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleCitizenMood} />
-                    <span className="p-float-label">
-                        <InputText id="citizenMood" value={citizenMood} onChange={(e) => setCitizenMood(e.target.value)} />
-                        <label htmlFor="citizenMood">Citizen Mood</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleCitizenWealth} />
-                    <span className="p-float-label">
-                        <InputText id="citizenWealth" value={citizenWealth} onChange={(e) => setCitizenWealth(e.target.value)} />
-                        <label htmlFor="citizenWealth">Citizen Wealth</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleReligion} />
-                    <span className="p-float-label">
-                        <InputText id="religion" value={religion} onChange={(e) => setReligion(e.target.value)} />
-                        <label htmlFor="religion">Religion</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleNotableLaw} />
-                    <span className="p-float-label">
-                        <InputText id="notableLaw" value={notableLaw} onChange={(e) => setNotableLaw(e.target.value)} />
-                        <label htmlFor="notableLaw">Notable Law</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleLanguage} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleLanguage} />
                     <span className="p-float-label">
                         <InputText id="language" value={language} onChange={(e) => setLanguage(e.target.value)} />
-                        <label htmlFor="language">Language</label>
+                        <label htmlFor="language">Language(s)</label>
                     </span>
                 </div>
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleXenophobia} />
-                    <span className="p-float-label">
-                        <InputText id="xenophobia" value={xenophobia} onChange={(e) => setXenophobia(e.target.value)} />
-                        <label htmlFor="xenophobia">Xenophobia</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleClassSystem} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleClassSystem} />
                     <span className="p-float-label">
                         <InputText id="classSystem" value={classSystem} onChange={(e) => setClassSystem(e.target.value)} />
                         <label htmlFor="classSystem">Class System</label>
@@ -396,10 +291,109 @@ export default function GenerateNation(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleOutcasts} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleOutcasts} />
                     <span className="p-float-label">
                         <InputText id="outcasts" value={outcasts} onChange={(e) => setOutcasts(e.target.value)} />
                         <label htmlFor="outcasts">Outcasts</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleDivisions} />
+                    <span className="p-float-label">
+                        <InputText id="divisions" value={divisions} onChange={(e) => setDivisions(e.target.value)} />
+                        <label htmlFor="divisions">Divisions</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleRuler} />
+                    <span className="p-float-label">
+                        <InputTextarea id="ruler" value={ruler} onChange={(e) => setRuler(e.target.value)} />
+                        <label htmlFor="ruler">Ruler</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleFounder} />
+                    <span className="p-float-label">
+                        <InputTextarea id="founder" value={founder} onChange={(e) => setFounder(e.target.value)} />
+                        <label htmlFor="founder">Founder</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleAge} />
+                    <span className="p-float-label">
+                        <InputTextarea id="age" value={age} onChange={(e) => setAge(e.target.value)} />
+                        <label htmlFor="age">Age</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handlePolitics} />
+                    <span className="p-float-label">
+                        <InputTextarea id="politics" value={politics} onChange={(e) => setPolitics(e.target.value)} />
+                        <label htmlFor="politics">Politics</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleEconomics} />
+                    <span className="p-float-label">
+                        <InputTextarea id="economics" value={economics} onChange={(e) => setEconomics(e.target.value)} />
+                        <label htmlFor="economics">Economics</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleUnique} />
+                    <span className="p-float-label">
+                        <InputTextarea id="unique" value={unique} onChange={(e) => setUnique(e.target.value)} />
+                        <label htmlFor="unique">Unique Characteristic</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleCitizenMood} />
+                    <span className="p-float-label">
+                        <InputTextarea id="citizenMood" value={citizenMood} onChange={(e) => setCitizenMood(e.target.value)} />
+                        <label htmlFor="citizenMood">Citizen Mood</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleCitizenWealth} />
+                    <span className="p-float-label">
+                        <InputTextarea id="citizenWealth" value={citizenWealth} onChange={(e) => setCitizenWealth(e.target.value)} />
+                        <label htmlFor="citizenWealth">Citizen Wealth</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleReligion} />
+                    <span className="p-float-label">
+                        <InputTextarea id="religion" value={religion} onChange={(e) => setReligion(e.target.value)} />
+                        <label htmlFor="religion">Religion</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="help" onClick={handleNotableLaw} />
+                    <span className="p-float-label">
+                        <InputTextarea id="notableLaw" value={notableLaw} onChange={(e) => setNotableLaw(e.target.value)} />
+                        <label htmlFor="notableLaw">Notable Law</label>
                     </span>
                 </div>
             </div>
@@ -416,7 +410,7 @@ export default function GenerateNation(props) {
         <br></br>
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Add Settlement" onClick={handleAddSettlement} />
+                <Button className="p-inputgroup-addon" label="Add Settlement" severity="info" onClick={handleAddSettlement} />
             </div>
             <div className="flex-auto">
                 <Button className="p-inputgroup-addon" label="Add Shop" onClick={handleAddShop} />
@@ -428,7 +422,7 @@ export default function GenerateNation(props) {
                 <Button className="p-inputgroup-addon" label="Add NPC" severity="help" onClick={handleAddNPC} />
             </div>
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Regenerate Town" severity="info" onClick={handleNation} />
+                <Button className="p-inputgroup-addon" label="Regenerate Nation" severity="help" onClick={handleNation} />
             </div>
             <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />

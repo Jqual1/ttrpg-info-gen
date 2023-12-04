@@ -136,10 +136,10 @@ export default function GenerateInfo() {
               <Button className="p-inputgroup-addon" label="Add World" severity="info" onClick={handleAddWorld} />
           </div>
           <div className="flex-auto">
-              <Button className="p-inputgroup-addon" label="Add Continent" severity="info" onClick={handleAddContinent} />
+              <Button className="p-inputgroup-addon" label="Add Continent" onClick={handleAddContinent} />
           </div>
           <div className="flex-auto">
-              <Button className="p-inputgroup-addon" label="Add Nation" severity="info" onClick={handleAddNation} />
+              <Button className="p-inputgroup-addon" label="Add Nation" severity="help" onClick={handleAddNation} />
           </div>
           <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Add Settlement" severity="info" onClick={handleAddSettlement} />

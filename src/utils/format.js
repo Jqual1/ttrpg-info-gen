@@ -52,7 +52,6 @@ export default function format(param) {
         `- **Religion**: ${input.religion}\n` +
         `- **Notable Law**: ${input.notableLaw}\n` +
         `- **Language**: ${input.language}\n` +
-        `- **Xenophobia**: ${input.xenophobia}\n` +
         `- **Class System**: ${input.classSystem}\n` +
         `- **Outcasts**: ${input.outcasts}\n`;
     }

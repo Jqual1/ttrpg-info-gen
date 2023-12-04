@@ -24,6 +24,11 @@ export default function GenerateWorld(props) {
     const NAT_RACES   = 39;
     const CATACLYSM   = 40;
     const CREATION    = 41;
+    const MINERAL     = 43;
+    const SUN_COLOR   = 46;
+    const SPECIES     = 47;
+    const PLANE       = 48;
+    const EXPERIMENT  = 49;
 
     const parent = props.props.parent;
     const key = `${props.props.parent}_${props.props.key}`;
@@ -191,7 +196,16 @@ export default function GenerateWorld(props) {
     }
     
     const handleUnique = () => {
-      setUnique(settlementData[UNIQUE].roll[randomNumber(settlementData[UNIQUE].roll.length)]);
+      var num = randomNumber(settlementData[UNIQUE].roll.length);
+      if (num === 0) {
+        setUnique("The sun is " + settlementData[SUN_COLOR].roll[randomNumber(settlementData[SUN_COLOR].roll.length)]);
+      } else if (num === 1) {
+        setUnique("There is an over-abundance of " + settlementData[MINERAL].roll[randomNumber(settlementData[MINERAL].roll.length)]);
+      } else if (num === 2) {
+        setUnique("There is an scarcity of " + settlementData[MINERAL].roll[randomNumber(settlementData[MINERAL].roll.length)]);
+      } else {
+        setUnique(settlementData[UNIQUE].roll[num]);
+      }
     }
     
     const handleDominated = () => {
@@ -203,11 +217,25 @@ export default function GenerateWorld(props) {
     }
     
     const handleCataclysm = () => {
-      setCataclysm(settlementData[CATACLYSM].roll[randomNumber(settlementData[CATACLYSM].roll.length)]);
+      var num = randomNumber(settlementData[CATACLYSM].roll.length);
+      if (num === 0) {
+        setCataclysm(settlementData[SPECIES].roll[randomNumber(settlementData[SPECIES].roll.length)] + " tried to take over the world.");
+      } else if (num === 1) {
+        setCataclysm("The material plane crossed with " + settlementData[PLANE].roll[randomNumber(settlementData[PLANE].roll.length)] +
+        " causing the planes to bleed into each other.");
+      } else {
+        setCataclysm(settlementData[CATACLYSM].roll[num]);
+      }
     }
     
     const handleCreation = () => {
-      setCreation(settlementData[CREATION].roll[randomNumber(settlementData[CREATION].roll.length)]);
+      var num = randomNumber(settlementData[CREATION].roll.length)
+      if (num === 0) {
+        setCreation("It was created as one of many experiments by a council of gods trying to discover " +
+        settlementData[EXPERIMENT].roll[randomNumber(settlementData[EXPERIMENT].roll.length)]);
+      } else {
+        setCreation(settlementData[CREATION].roll[num]);
+      }
     }
 
     // Runs all Settlement Generators
@@ -241,7 +269,7 @@ export default function GenerateWorld(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleSize} />
                     <span className="p-float-label">
-                        <InputText id="size" value={size} onChange={(e) => setSize(e.target.value)} />
+                        <InputTextarea id="size" value={size} onChange={(e) => setSize(e.target.value)} />
                         <label htmlFor="size">Size</label>
                     </span>
                 </div>
@@ -250,7 +278,7 @@ export default function GenerateWorld(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleClimate} />
                     <span className="p-float-label">
-                        <InputText id="climate" value={climate} onChange={(e) => setClimate(e.target.value)} />
+                        <InputTextarea id="climate" value={climate} onChange={(e) => setClimate(e.target.value)} />
                         <label htmlFor="climate">Climate</label>
                     </span>
                 </div>
@@ -259,7 +287,7 @@ export default function GenerateWorld(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleLandMasses} />
                     <span className="p-float-label">
-                        <InputText id="landMasses" value={landMasses} onChange={(e) => setLandMasses(e.target.value)} />
+                        <InputTextarea id="landMasses" value={landMasses} onChange={(e) => setLandMasses(e.target.value)} />
                         <label htmlFor="landMasses">Land Masses</label>
                     </span>
                 </div>
@@ -268,7 +296,7 @@ export default function GenerateWorld(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleMagic} />
                     <span className="p-float-label">
-                        <InputText id="magic" value={magic} onChange={(e) => setMagic(e.target.value)} />
+                        <InputTextarea id="magic" value={magic} onChange={(e) => setMagic(e.target.value)} />
                         <label htmlFor="magic">Magic</label>
                     </span>
                 </div>
@@ -277,7 +305,7 @@ export default function GenerateWorld(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleTechnology} />
                     <span className="p-float-label">
-                        <InputText id="technology" value={technology} onChange={(e) => setTechnology(e.target.value)} />
+                        <InputTextarea id="technology" value={technology} onChange={(e) => setTechnology(e.target.value)} />
                         <label htmlFor="technology">Technology</label>
                     </span>
                 </div>
@@ -286,7 +314,7 @@ export default function GenerateWorld(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleUnique} />
                     <span className="p-float-label">
-                        <InputText id="unique" value={unique} onChange={(e) => setUnique(e.target.value)} />
+                        <InputTextarea id="unique" value={unique} onChange={(e) => setUnique(e.target.value)} />
                         <label htmlFor="unique">Unique Characteristic</label>
                     </span>
                 </div>
@@ -295,7 +323,7 @@ export default function GenerateWorld(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleDominated} />
                     <span className="p-float-label">
-                        <InputText id="dominated" value={dominated} onChange={(e) => setDominated(e.target.value)} />
+                        <InputTextarea id="dominated" value={dominated} onChange={(e) => setDominated(e.target.value)} />
                         <label htmlFor="dominated">Dominated</label>
                     </span>
                 </div>
@@ -304,7 +332,7 @@ export default function GenerateWorld(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleNatRaces} />
                     <span className="p-float-label">
-                        <InputText id="natRaces" value={natRaces} onChange={(e) => setNatRaces(e.target.value)} />
+                        <InputTextarea id="natRaces" value={natRaces} onChange={(e) => setNatRaces(e.target.value)} />
                         <label htmlFor="natRaces">Natural Races</label>
                     </span>
                 </div>
@@ -313,7 +341,7 @@ export default function GenerateWorld(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleCataclysm} />
                     <span className="p-float-label">
-                        <InputText id="cataclysm" value={cataclysm} onChange={(e) => setCataclysm(e.target.value)} />
+                        <InputTextarea id="cataclysm" value={cataclysm} onChange={(e) => setCataclysm(e.target.value)} />
                         <label htmlFor="cataclysm">Cataclysm</label>
                     </span>
                 </div>
@@ -322,7 +350,7 @@ export default function GenerateWorld(props) {
                 <div className="p-inputgroup">
                     <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleCreation} />
                     <span className="p-float-label">
-                        <InputText id="creation" value={creation} onChange={(e) => setCreation(e.target.value)} />
+                        <InputTextarea id="creation" value={creation} onChange={(e) => setCreation(e.target.value)} />
                         <label htmlFor="creation">Creation</label>
                     </span>
                 </div>
@@ -343,10 +371,10 @@ export default function GenerateWorld(props) {
                 <Button className="p-inputgroup-addon" label="Add Continent" onClick={handleAddContinent} />
             </div>
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Add Nation" onClick={handleAddNation} />
+                <Button className="p-inputgroup-addon" label="Add Nation" severity="help" onClick={handleAddNation} />
             </div>
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Add Settlement" onClick={handleAddSettlement} />
+                <Button className="p-inputgroup-addon" label="Add Settlement" severity="info" onClick={handleAddSettlement} />
             </div>
             <div className="flex-auto">
                 <Button className="p-inputgroup-addon" label="Add Shop" onClick={handleAddShop} />
@@ -358,7 +386,7 @@ export default function GenerateWorld(props) {
                 <Button className="p-inputgroup-addon" label="Add NPC" severity="help" onClick={handleAddNPC} />
             </div>
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Regenerate Town" severity="info" onClick={handleSettlement} />
+                <Button className="p-inputgroup-addon" label="Regenerate World" severity="info" onClick={handleSettlement} />
             </div>
             <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />
