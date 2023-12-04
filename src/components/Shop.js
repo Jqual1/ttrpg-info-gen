@@ -31,6 +31,7 @@ export default function GenerateShop(props) {
     const [size, setSize] = useState('');
     const [busyOrNa, setBusyOrNa] = useState('');
     const [interest, setInterest] = useState('');
+    const [notes, setNotes] = useState('');
     // Shop "Children" Stuff (NPCs)
     const [numCurr, setNumCurr] = useState(1);
     const [gens, setGens] = useState([]);
@@ -42,7 +43,7 @@ export default function GenerateShop(props) {
 
     useEffect(() => {
       handleMakeJSON();
-    }, [product, shopType, owner, shopCondition, merchCondition, supplier, priced, size, busyOrNa, interest, children])
+    }, [product, shopType, owner, shopCondition, merchCondition, supplier, priced, size, busyOrNa, interest, notes, children])
 
     // Makes and Adds JSON to sessionStorage
     const handleMakeJSON = () => {
@@ -59,7 +60,8 @@ export default function GenerateShop(props) {
         priced:         priced,
         size:           size,
         busyOrNa:       busyOrNa,
-        interest:       interest
+        interest:       interest,
+        notes:          notes
       }
       sessionStorage.setItem(key, JSON.stringify(json))
   }
@@ -247,6 +249,14 @@ export default function GenerateShop(props) {
                     <span className="p-float-label">
                         <InputText id="interest" value={interest} onChange={(e) => setInterest(e.target.value)} />
                         <label htmlFor="interest">Point of Interest</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <span className="p-float-label">
+                        <InputTextarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
+                        <label htmlFor="notes">Notes</label>
                     </span>
                 </div>
             </div>

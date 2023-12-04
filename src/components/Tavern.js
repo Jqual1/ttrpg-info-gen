@@ -30,6 +30,7 @@ export default function GenerateTavern(props) {
     const [cocktail, setCocktail] = useState('');
     const [trouble, setTrouble] = useState('');
     const [notable, setNotable] = useState('');
+    const [notes, setNotes] = useState('');
     // Tavern "Children" Stuff (NPCs)
     const [numCurr, setNumCurr] = useState(1);
     const [gens, setGens] = useState([]);
@@ -41,7 +42,7 @@ export default function GenerateTavern(props) {
 
     useEffect(() => {
       handleMakeJSON();
-    }, [tavernName, comfort, event, entertainment, patron, cocktail, trouble, notable, children])
+    }, [tavernName, comfort, event, entertainment, patron, cocktail, trouble, notable, notes, children])
 
     // Makes and Adds JSON to sessionStorage
     const handleMakeJSON = () => {
@@ -57,6 +58,7 @@ export default function GenerateTavern(props) {
         cocktail:       cocktail,
         trouble:        trouble,
         notable:        notable,
+        notes:          notes
       }
       sessionStorage.setItem(key, JSON.stringify(json))
   }
@@ -248,6 +250,14 @@ export default function GenerateTavern(props) {
                     <span className="p-float-label">
                         <InputTextarea id="notable" value={notable} onChange={(e) => setNotable(e.target.value)} />
                         <label htmlFor="notable">Notable</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <span className="p-float-label">
+                        <InputTextarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
+                        <label htmlFor="notes">Notes</label>
                     </span>
                 </div>
             </div>

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { saveAs } from 'file-saver';
 import { Button } from "primereact/button";
+import GenerateWorld from "../components/World";
+import GenerateContinent from "../components/Continent";
+import GenerateNation from "../components/Nation";
 import GenerateSettlement from "../components/Settlement";
 import GenerateShop from "../components/Shop";
 import GenerateTavern from "../components/Tavern";
@@ -55,7 +58,34 @@ export default function GenerateInfo() {
     sessionStorage.removeItem(key);
    }
 
-  // Generators
+// Generators
+  function handleAddWorld(e) {
+    setNumCurr(numCurr+1);
+    var genKey = "world" + numCurr;
+    var currGen = {parent: "null", key: genKey, handleRemove: handleRemoveChild}
+    setGens(prevGens => {
+      return [...prevGens, <GenerateWorld key={`null_${genKey}`} props={currGen} />]
+    })
+  }
+
+  function handleAddContinent(e) {
+    setNumCurr(numCurr+1);
+    var genKey = "continent" + numCurr;
+    var currGen = {parent: "null", key: genKey, handleRemove: handleRemoveChild}
+    setGens(prevGens => {
+      return [...prevGens, <GenerateContinent key={`null_${genKey}`} props={currGen} />]
+    })
+  }
+
+  function handleAddNation(e) {
+    setNumCurr(numCurr+1);
+    var genKey = "nation" + numCurr;
+    var currGen = {parent: "null", key: genKey, handleRemove: handleRemoveChild}
+    setGens(prevGens => {
+      return [...prevGens, <GenerateNation key={`null_${genKey}`} props={currGen} />]
+    })
+  }
+
   function handleAddSettlement(e) {
     setNumCurr(numCurr+1);
     var genKey = "settlement" + numCurr;
@@ -101,6 +131,15 @@ export default function GenerateInfo() {
         <div className="flex flex-wrap gap-3 p-fluid">
           <div className="flex-auto">
             <Button className="p-inputgroup-addon" label="Export" onClick={formatExport} />
+          </div>
+          <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Add World" severity="info" onClick={handleAddWorld} />
+          </div>
+          <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Add Continent" severity="info" onClick={handleAddContinent} />
+          </div>
+          <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Add Nation" severity="info" onClick={handleAddNation} />
           </div>
           <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Add Settlement" severity="info" onClick={handleAddSettlement} />

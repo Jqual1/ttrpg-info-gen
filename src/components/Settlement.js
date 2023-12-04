@@ -26,6 +26,7 @@ export default function GenerateSettlement(props) {
     const [atmosphere, setAtmosphere] = useState('');
     const [promFeature, setPromFeature] = useState('');
     const [plotHook, setPlotHook] = useState('');
+    const [notes, setNotes] = useState('');
     // Settlement "Children" Stuff (NPCs)
     const [numCurr, setNumCurr] = useState(1);
     const [gens, setGens] = useState([]);
@@ -37,7 +38,7 @@ export default function GenerateSettlement(props) {
 
     useEffect(() => {
       handleMakeJSON();
-    }, [name, population, inhabitants, atmosphere, promFeature, plotHook, children])
+    }, [name, population, inhabitants, atmosphere, promFeature, plotHook, notes, children])
 
     // Makes and Adds JSON to sessionStorage
     const handleMakeJSON = () => {
@@ -51,6 +52,7 @@ export default function GenerateSettlement(props) {
         atmosphere:     atmosphere,
         promFeature:    promFeature,
         plotHook:       plotHook,
+        notes:          notes
       }
       sessionStorage.setItem(key, JSON.stringify(json))
   }
@@ -206,6 +208,14 @@ export default function GenerateSettlement(props) {
                     </span>
                 </div>
             </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <span className="p-float-label">
+                        <InputTextarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
+                        <label htmlFor="notes">Notes</label>
+                    </span>
+                </div>
+            </div>
             <div className="flex-auto">{gens}</div>
         </div>
         <br></br>
@@ -220,7 +230,7 @@ export default function GenerateSettlement(props) {
                 <Button className="p-inputgroup-addon" label="Add NPC" severity="help" onClick={handleAddNPC} />
             </div>
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Regenerate Town" severity="info" onClick={handleSettlement} />
+                <Button className="p-inputgroup-addon" label="Regenerate Settlement" severity="info" onClick={handleSettlement} />
             </div>
             <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />

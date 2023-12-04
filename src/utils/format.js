@@ -9,8 +9,54 @@ export default function format(param) {
         output += '#';
     }
 
-
-    if (input.type === 'settlement') {
+    if (input.type === 'world') {
+        output += 
+        ` (World) ${input.name}\n` +
+        `- **Size**: ${input.size}\n` +
+        `- **Climate**: ${input.climate}\n` +
+        `- **Land Masses**: ${input.landMasses}\n` +
+        `- **Magic**: ${input.magic}\n` +
+        `- **Technology**: ${input.technology}\n` +
+        `- **Unique**: ${input.unique}\n` +
+        `- **Dominated**: ${input.dominated}\n` +
+        `- **Natural Races**: ${input.natRaces}\n` +
+        `- **Cataclysm**: ${input.cataclysm}\n` +
+        `- **Creation**: ${input.creation}\n`;
+    }
+    else if (input.type === 'continent') {
+        output += 
+        ` (Continent) ${input.name}\n` +
+        `- **Size**: ${input.size}\n` +
+        `- **Location**: ${input.location}\n` +
+        `- **Climates**: ${input.climates}\n` +
+        `- **Unique**: ${input.unique}\n` +
+        `- **Discovery**: ${input.discovery}\n` +
+        `- **Discoverer**: ${input.discoverer}\n` +
+        `- **Domestic Creatures**: ${input.dCreatures}\n` +
+        `- **Imported Creatures**: ${input.iCreatures}\n` +
+        `- **Domestic Plants**: ${input.dPlants}\n` +
+        `- **Imported Plants**: ${input.iPlants}\n`;
+    }
+    else if (input.type === 'nation') {
+        output += 
+        ` (Nation) ${input.name}\n` +
+        `- **Age**: ${input.age}\n` +
+        `- **Politics**: ${input.politics}\n` +
+        `- **Economics**: ${input.economics}\n` +
+        `- **Ruler**: ${input.ruler}\n` +
+        `- **Founder**: ${input.founder}\n` +
+        `- **Unique Characteristic**: ${input.unique}\n` +
+        `- **Divisions**: ${input.divisions}\n` +
+        `- **Citizen Mood**: ${input.citizenMood}\n` +
+        `- **Citizen Wealth**: ${input.citizenWealth}\n` +
+        `- **Religion**: ${input.religion}\n` +
+        `- **Notable Law**: ${input.notableLaw}\n` +
+        `- **Language**: ${input.language}\n` +
+        `- **Xenophobia**: ${input.xenophobia}\n` +
+        `- **Class System**: ${input.classSystem}\n` +
+        `- **Outcasts**: ${input.outcasts}\n`;
+    }
+    else if (input.type === 'settlement') {
         output += 
         ` (Settlement) ${input.name}\n` +
         `- **Population**: ${input.population}\n` +
@@ -19,7 +65,7 @@ export default function format(param) {
         `- **Prominent Feature**: ${input.promFeature}\n` +
         `- **Possible Reason To Stay**: ${input.plotHook}\n`;
     }
-    if (input.type === 'shop') {
+    else if (input.type === 'shop') {
         output += 
         ` (Shop) ${input.product}\n` +
         `- **Shop Type**: ${input.shopType}\n` +
@@ -54,6 +100,9 @@ export default function format(param) {
         `- **Nose**: ${input.noseType}\n` +
         `- **Jaw**: ${input.jawType}\n` +
         `- **Body**: ${input.height} ${input.bodyType}\n`;
+    }
+    if (input.notes !== '') {
+    output += `- **Notes**: ${input.notes}\n`;
     }
     return output;
 }

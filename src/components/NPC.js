@@ -39,6 +39,7 @@ export default function GenerateNPC(props) {
     const [hairType, setHairType] = useState('');
     const [height, setHeight] = useState('');
     const [bodyType, setBodyType] = useState('');
+    const [notes, setNotes] = useState('');
 
     
     useEffect(() => {
@@ -48,7 +49,7 @@ export default function GenerateNPC(props) {
     useEffect(() => {
         handleMakeJSON();
     }, [firstName, lastName, personality, race, hairColor, eyeColor,
-        eyeType, earType, mouthType, noseType, jawType, hairType, height, bodyType])
+        eyeType, earType, mouthType, noseType, jawType, hairType, height, notes, bodyType])
 
     function randomNumber(options) {
       // Get the number between 0 (inclusive) and max (exclusive) for an array
@@ -73,6 +74,7 @@ export default function GenerateNPC(props) {
             hairType:       hairType,
             height:         height,
             bodyType:       bodyType,
+            notes:          notes
         }
         sessionStorage.setItem(key, JSON.stringify(json));
     }
@@ -303,6 +305,14 @@ export default function GenerateNPC(props) {
                     <span className="p-float-label">
                         <InputText id="bodytype" value={bodyType} onChange={(e) => setBodyType(e.target.value)} />
                         <label htmlFor="bodytype">Body Type</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <span className="p-float-label">
+                        <InputTextarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
+                        <label htmlFor="notes">Notes</label>
                     </span>
                 </div>
             </div>
