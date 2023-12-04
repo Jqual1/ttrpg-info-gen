@@ -213,7 +213,7 @@ export default function GenerateContinent(props) {
     };
   
     return (
-      <Panel header={name + " (Continent Generator)"} toggleable>
+      <Panel header={name + " (Continent Generator)"} >
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">

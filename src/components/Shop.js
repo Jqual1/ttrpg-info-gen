@@ -160,7 +160,7 @@ export default function GenerateShop(props) {
     };
   
     return (
-    <Panel header={product + " (Shop Generator)"} toggleable>
+    <Panel header={product + " (Shop Generator)"} >
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">

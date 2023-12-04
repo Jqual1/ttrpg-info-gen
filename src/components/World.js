@@ -226,7 +226,7 @@ export default function GenerateWorld(props) {
     };
   
     return (
-      <Panel header={name + " (World Generator)"} toggleable>
+      <Panel header={name + " (World Generator)"} >
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">

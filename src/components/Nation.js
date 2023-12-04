@@ -257,7 +257,7 @@ export default function GenerateNation(props) {
     };
   
     return (
-      <Panel header={name + " (Nation Generator)"} toggleable>
+      <Panel header={name + " (Nation Generator)"} >
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">

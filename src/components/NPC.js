@@ -180,7 +180,7 @@ export default function GenerateNPC(props) {
     };
   
     return (
-    <Panel header={firstName + " " + lastName + " (NPC Generator)"} toggleable>
+    <Panel header={firstName + " " + lastName + " (NPC Generator)"} >
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">

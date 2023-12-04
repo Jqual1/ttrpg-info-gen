@@ -179,7 +179,7 @@ export default function GenerateTavern(props) {
     };
   
     return (
-      <Panel header={tavernName + " (Tavern/Inn Generator)"} toggleable>
+      <Panel header={tavernName + " (Tavern/Inn Generator)"} >
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">
