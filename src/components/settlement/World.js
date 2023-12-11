@@ -1,81 +1,96 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "primereact/button";
-import { settlementData } from "../data/settlement"
+import { settlementData } from "../../data/settlement"
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Panel } from "primereact/panel";
+import GenerateContinent from "./Continent";
 import GenerateNation from "./Nation";
 import GenerateSettlement from "./Settlement";
-import GenerateShop from "./Shop";
-import GenerateTavern from "./Tavern";
-import GenerateNPC from "./NPC";
+import GenerateShop from "../Shop";
+import GenerateTavern from "../Tavern";
+import GenerateNPC from "../NPC";
 
-export default function GenerateContinent(props) {
-    const NAME1         = 0;
-    const NAME2         = 1;
-    const SIZE          = 22;
-    const LOCATION      = 23;
-    const CLIMATES      = 24;
-    const UNIQUE        = 25;
-    const DISCOVERY     = 26;
-    const DISCOVERER    = 27;
-    const D_CREATURES   = 28;
-    const I_CREATURES   = 29;
-    const D_PLANTS      = 30;
-    const I_PLANTS      = 31;
-    const MINERAL       = 42;
-    const CATACLYSM     = 44;
-    const LAND_TYPE     = 45;
+export default function GenerateWorld(props) {
+    const NAME1       = 0;
+    const NAME2       = 1;
+    const SIZE        = 32;
+    const CLIMATE     = 33;
+    const LAND_MASSES = 34;
+    const MAGIC       = 35;
+    const TECHNOLOGY  = 36;
+    const UNIQUE      = 37;
+    const DOMINATED   = 38;
+    const NAT_RACES   = 39;
+    const CATACLYSM   = 40;
+    const CREATION    = 41;
+    const MINERAL     = 43;
+    const SUN_COLOR   = 46;
+    const SPECIES     = 47;
+    const PLANE       = 48;
+    const EXPERIMENT  = 49;
 
     const parent = props.props.parent;
     const key = `${props.props.parent}_${props.props.key}`;
     // Settlement Variables the user will see
     const [name, setName] = useState('');
     const [size, setSize] = useState('');
-    const [location, setLocation] = useState('');
-    const [climates, setClimates] = useState('');
+    const [climate, setClimate] = useState('');
+    const [landMasses, setLandMasses] = useState('');
+    const [magic, setMagic] = useState('');
+    const [technology, setTechnology] = useState('');
     const [unique, setUnique] = useState('');
-    const [discovery, setDiscovery] = useState('');
-    const [discoverer, setDiscoverer] = useState('');
-    const [dCreatures, setDCreatures] = useState('');
-    const [iCreatures, setICreatures] = useState('');
-    const [dPlants, setDPlants] = useState('');
-    const [iPlants, setIPlants] = useState('');
-    const [notes, setNotes] = useState('');
+    const [dominated, setDominated] = useState('');
+    const [natRaces, setNatRaces] = useState('');
+    const [cataclysm, setCataclysm] = useState('');
+    const [creation, setCreation] = useState('');
+    const [notes, setNotes] = useState('')
     // Settlement "Children" Stuff (NPCs)
     const [numCurr, setNumCurr] = useState(1);
     const [gens, setGens] = useState([]);
     const [children, setChildren] = useState([]);
 
     useEffect(() => {
-        handleContinent();
+        handleSettlement();
     }, []);
 
     useEffect(() => {
       handleMakeJSON();
-    }, [name, size, location, climates, unique, discovery, discoverer, dCreatures, iCreatures, dPlants, iPlants, notes, children])
+    }, [name, size, climate, landMasses, magic, technology, unique, dominated, natRaces, cataclysm, creation, notes, children])
 
     // Makes and Adds JSON to sessionStorage
     const handleMakeJSON = () => {
       var json = {
         parent:         parent,
         children:       children,
-        type:           'continent',
+        type:           'world',
         name:           name,
         size:           size,
-        location:       location,
-        climates:       climates,
+        climate:        climate,
+        landMasses:     landMasses,
+        magic:          magic,
+        technology:     technology,
         unique:         unique,
-        discovery:      discovery,
-        discoverer:     discoverer,
-        dCreatures:     dCreatures,
-        iCreatures:     iCreatures,
-        dPlants:        dPlants,
-        iPlants:        iPlants,
-        notes:          notes,
+        dominated:      dominated,
+        natRaces:       natRaces,
+        cataclysm:      cataclysm,
+        creation:       creation,
+        notes:          notes
       }
       sessionStorage.setItem(key, JSON.stringify(json))
   }
+
+  function handleAddContinent(e) {
+    var genKey = "continent" + numCurr;
+    var currGen = {parent: key, key: genKey, handleRemove: handleRemoveChild}
+    setNumCurr(numCurr+1);
+    setChildren(prevChildren => {
+      return [...prevChildren, `${key}_${genKey}`]
+    })
+    setGens(prevGens => {
+      return [...prevGens, <GenerateContinent key={`${key}_${genKey}`} props={currGen} />]
+    })
+    }
 
   function handleAddNation(e) {
     var genKey = "nation" + numCurr;
@@ -154,145 +169,105 @@ export default function GenerateContinent(props) {
       sessionStorage.removeItem(key);
      }
 
-    // Runs the Continent Name Generator
+    // Runs the World Name Generator
     const handleName = () => {
       setName(settlementData[NAME1].roll[randomNumber(settlementData[NAME1].roll.length)] +
               settlementData[NAME2].roll[randomNumber(settlementData[NAME2].roll.length)]);
     }
 
     const handleSize = () => {
-        setSize(settlementData[SIZE].roll[randomNumber(settlementData[SIZE].roll.length)]);
-      }
-
-    const handleLocation = () => {
-        setLocation(settlementData[LOCATION].roll[randomNumber(settlementData[LOCATION].roll.length)]);
-      }
-      
-    const handleClimates = () => {
-        setClimates(settlementData[CLIMATES].roll[randomNumber(settlementData[CLIMATES].roll.length)]);
-      }
-      
+      setSize(settlementData[SIZE].roll[randomNumber(settlementData[SIZE].roll.length)]);
+    }
+    
+    const handleClimate = () => {
+      setClimate(settlementData[CLIMATE].roll[randomNumber(settlementData[CLIMATE].roll.length)]);
+    }
+    
+    const handleLandMasses = () => {
+      setLandMasses(settlementData[LAND_MASSES].roll[randomNumber(settlementData[LAND_MASSES].roll.length)]);
+    }
+    
+    const handleMagic = () => {
+      setMagic(settlementData[MAGIC].roll[randomNumber(settlementData[MAGIC].roll.length)]);
+    }
+    
+    const handleTechnology = () => {
+      setTechnology(settlementData[TECHNOLOGY].roll[randomNumber(settlementData[TECHNOLOGY].roll.length)]);
+    }
+    
     const handleUnique = () => {
       var num = randomNumber(settlementData[UNIQUE].roll.length);
       if (num === 0) {
-        setUnique("It is the only place to find the rare mineral " + settlementData[MINERAL].roll[randomNumber(settlementData[MINERAL].roll.length)]);
+        setUnique("The sun is " + settlementData[SUN_COLOR].roll[randomNumber(settlementData[SUN_COLOR].roll.length)]);
       } else if (num === 1) {
-        setUnique(settlementData[CATACLYSM].roll[randomNumber(settlementData[CATACLYSM].roll.length)]);
+        setUnique("There is an over-abundance of " + settlementData[MINERAL].roll[randomNumber(settlementData[MINERAL].roll.length)]);
       } else if (num === 2) {
-        setUnique("It is dominated by " + settlementData[LAND_TYPE].roll[randomNumber(settlementData[LAND_TYPE].roll.length)]);
+        setUnique("There is an scarcity of " + settlementData[MINERAL].roll[randomNumber(settlementData[MINERAL].roll.length)]);
       } else {
         setUnique(settlementData[UNIQUE].roll[num]);
       }
+    }
+    
+    const handleDominated = () => {
+      setDominated(settlementData[DOMINATED].roll[randomNumber(settlementData[DOMINATED].roll.length)]);
+    }
+    
+    const handleNatRaces = () => {
+      setNatRaces(settlementData[NAT_RACES].roll[randomNumber(settlementData[NAT_RACES].roll.length)]);
+    }
+    
+    const handleCataclysm = () => {
+      var num = randomNumber(settlementData[CATACLYSM].roll.length);
+      if (num === 0) {
+        setCataclysm(settlementData[SPECIES].roll[randomNumber(settlementData[SPECIES].roll.length)] + " tried to take over the world.");
+      } else if (num === 1) {
+        setCataclysm("The material plane crossed with " + settlementData[PLANE].roll[randomNumber(settlementData[PLANE].roll.length)] +
+        " causing the planes to bleed into each other.");
+      } else {
+        setCataclysm(settlementData[CATACLYSM].roll[num]);
       }
-      
-    const handleDiscovery = () => {
-        setDiscovery(settlementData[DISCOVERY].roll[randomNumber(settlementData[DISCOVERY].roll.length)]);
+    }
+    
+    const handleCreation = () => {
+      var num = randomNumber(settlementData[CREATION].roll.length)
+      if (num === 0) {
+        setCreation("It was created as one of many experiments by a council of gods trying to discover " +
+        settlementData[EXPERIMENT].roll[randomNumber(settlementData[EXPERIMENT].roll.length)]);
+      } else {
+        setCreation(settlementData[CREATION].roll[num]);
       }
-      
-    const handleDiscoverer = () => {
-        setDiscoverer(settlementData[DISCOVERER].roll[randomNumber(settlementData[DISCOVERER].roll.length)]);
-      }
-      
-    const handleDCreatures = () => {
-        setDCreatures(settlementData[D_CREATURES].roll[randomNumber(settlementData[D_CREATURES].roll.length)]);
-      }
-      
-    const handleICreatures = () => {
-        setICreatures(settlementData[I_CREATURES].roll[randomNumber(settlementData[I_CREATURES].roll.length)]);
-      }
-      
-    const handleDPlants = () => {
-        setDPlants(settlementData[D_PLANTS].roll[randomNumber(settlementData[D_PLANTS].roll.length)]);
-      }
-      
-    const handleIPlants = () => {
-        setIPlants(settlementData[I_PLANTS].roll[randomNumber(settlementData[I_PLANTS].roll.length)]);
-      }
+    }
 
-    // Runs all Continent Generators
-    const handleContinent = () => {
+    // Runs all Settlement Generators
+    const handleSettlement = () => {
       handleName();
       handleSize();
-      handleLocation();
-      handleClimates();
+      handleClimate();
+      handleLandMasses();
+      handleMagic();
+      handleTechnology();
       handleUnique();
-      handleDiscovery();
-      handleDiscoverer();
-      handleDCreatures();
-      handleICreatures();
-      handleDPlants();
-      handleIPlants();
+      handleDominated();
+      handleNatRaces();
+      handleCataclysm();
+      handleCreation();
     };
   
     return (
-      <Panel header={name + " (Continent Generator)"} >
+      <Panel header={name + " (World Generator)"} >
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleName} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleName} />
                     <span className="p-float-label">
                         <InputText id="name" value={name} onChange={(e) => setName(e.target.value)} />
-                        <label htmlFor="name">Continent Name</label>
+                        <label htmlFor="name">World Name</label>
                     </span>
                 </div>
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleLocation} />
-                    <span className="p-float-label">
-                        <InputText id="location" value={location} onChange={(e) => setLocation(e.target.value)} />
-                        <label htmlFor="location">Location</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleClimates} />
-                    <span className="p-float-label">
-                        <InputText id="climates" value={climates} onChange={(e) => setClimates(e.target.value)} />
-                        <label htmlFor="climates">Climates</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleDCreatures} />
-                    <span className="p-float-label">
-                        <InputText id="dCreatures" value={dCreatures} onChange={(e) => setDCreatures(e.target.value)} />
-                        <label htmlFor="dCreatures">Domestic Creatures</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleICreatures} />
-                    <span className="p-float-label">
-                        <InputText id="iCreatures" value={iCreatures} onChange={(e) => setICreatures(e.target.value)} />
-                        <label htmlFor="iCreatures">Imported Creatures</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleDPlants} />
-                    <span className="p-float-label">
-                        <InputText id="dPlants" value={dPlants} onChange={(e) => setDPlants(e.target.value)} />
-                        <label htmlFor="dPlants">Domestic Plants</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleIPlants} />
-                    <span className="p-float-label">
-                        <InputText id="iPlants" value={iPlants} onChange={(e) => setIPlants(e.target.value)} />
-                        <label htmlFor="iPlants">Imported Plants</label>
-                    </span>
-                </div>
-            </div>
-            <div className="flex-auto">
-                <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleSize} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleSize} />
                     <span className="p-float-label">
                         <InputTextarea id="size" value={size} onChange={(e) => setSize(e.target.value)} />
                         <label htmlFor="size">Size</label>
@@ -301,28 +276,82 @@ export default function GenerateContinent(props) {
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleUnique} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleClimate} />
+                    <span className="p-float-label">
+                        <InputTextarea id="climate" value={climate} onChange={(e) => setClimate(e.target.value)} />
+                        <label htmlFor="climate">Climate</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleLandMasses} />
+                    <span className="p-float-label">
+                        <InputTextarea id="landMasses" value={landMasses} onChange={(e) => setLandMasses(e.target.value)} />
+                        <label htmlFor="landMasses">Land Masses</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleMagic} />
+                    <span className="p-float-label">
+                        <InputTextarea id="magic" value={magic} onChange={(e) => setMagic(e.target.value)} />
+                        <label htmlFor="magic">Magic</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleTechnology} />
+                    <span className="p-float-label">
+                        <InputTextarea id="technology" value={technology} onChange={(e) => setTechnology(e.target.value)} />
+                        <label htmlFor="technology">Technology</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleUnique} />
                     <span className="p-float-label">
                         <InputTextarea id="unique" value={unique} onChange={(e) => setUnique(e.target.value)} />
-                        <label htmlFor="unique">Unique</label>
+                        <label htmlFor="unique">Unique Characteristic</label>
                     </span>
                 </div>
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleDiscovery} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleDominated} />
                     <span className="p-float-label">
-                        <InputTextarea id="discovery" value={discovery} onChange={(e) => setDiscovery(e.target.value)} />
-                        <label htmlFor="discovery">Discovery</label>
+                        <InputTextarea id="dominated" value={dominated} onChange={(e) => setDominated(e.target.value)} />
+                        <label htmlFor="dominated">Dominated</label>
                     </span>
                 </div>
             </div>
             <div className="flex-auto">
                 <div className="p-inputgroup">
-                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" onClick={handleDiscoverer} />
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleNatRaces} />
                     <span className="p-float-label">
-                        <InputTextarea id="discoverer" value={discoverer} onChange={(e) => setDiscoverer(e.target.value)} />
-                        <label htmlFor="discoverer">Discoverer</label>
+                        <InputTextarea id="natRaces" value={natRaces} onChange={(e) => setNatRaces(e.target.value)} />
+                        <label htmlFor="natRaces">Natural Races</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleCataclysm} />
+                    <span className="p-float-label">
+                        <InputTextarea id="cataclysm" value={cataclysm} onChange={(e) => setCataclysm(e.target.value)} />
+                        <label htmlFor="cataclysm">Cataclysm</label>
+                    </span>
+                </div>
+            </div>
+            <div className="flex-auto">
+                <div className="p-inputgroup">
+                    <Button className="p-inputgroup-addon" icon="pi pi-refresh" severity="info" onClick={handleCreation} />
+                    <span className="p-float-label">
+                        <InputTextarea id="creation" value={creation} onChange={(e) => setCreation(e.target.value)} />
+                        <label htmlFor="creation">Creation</label>
                     </span>
                 </div>
             </div>
@@ -338,6 +367,9 @@ export default function GenerateContinent(props) {
         </div>
         <br></br>
         <div className="flex flex-wrap gap-3 p-fluid">
+          <div className="flex-auto">
+                <Button className="p-inputgroup-addon" label="Add Continent" onClick={handleAddContinent} />
+            </div>
             <div className="flex-auto">
                 <Button className="p-inputgroup-addon" label="Add Nation" severity="help" onClick={handleAddNation} />
             </div>
@@ -354,7 +386,7 @@ export default function GenerateContinent(props) {
                 <Button className="p-inputgroup-addon" label="Add NPC" severity="help" onClick={handleAddNPC} />
             </div>
             <div className="flex-auto">
-                <Button className="p-inputgroup-addon" label="Regenerate Continent" onClick={handleContinent} />
+                <Button className="p-inputgroup-addon" label="Regenerate World" severity="info" onClick={handleSettlement} />
             </div>
             <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />

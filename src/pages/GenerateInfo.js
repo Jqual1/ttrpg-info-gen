@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { saveAs } from 'file-saver';
 import { Button } from "primereact/button";
-import GenerateWorld from "../components/World";
-import GenerateContinent from "../components/Continent";
-import GenerateNation from "../components/Nation";
-import GenerateSettlement from "../components/Settlement";
+import GenerateWorld from "../components/settlement/World";
+import GenerateContinent from "../components/settlement/Continent";
+import GenerateNation from "../components/settlement/Nation";
+import GenerateSettlement from "../components/settlement/Settlement";
 import GenerateShop from "../components/Shop";
 import GenerateTavern from "../components/Tavern";
 import GenerateNPC from "../components/NPC";
+import GeneratePotion from "../components/objects/Potion";
 import format from "../utils/format";
 
 export default function GenerateInfo() {
@@ -121,6 +122,15 @@ export default function GenerateInfo() {
       return [...prevGens, <GenerateNPC key={`null_${genKey}`} props={currGen} />]
     })
   }
+
+  function handleAddPotion(e) {
+    setNumCurr(numCurr+1);
+    var genKey = "potion" + numCurr;
+    var currGen = {parent: "null", key: genKey, handleRemove: handleRemoveChild}
+    setGens(prevGens => {
+      return [...prevGens, <GeneratePotion key={`null_${genKey}`} props={currGen} />]
+    })
+  }
   
     return (
       <div className="card">
@@ -152,6 +162,9 @@ export default function GenerateInfo() {
           </div>
           <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Add NPC" severity="help" onClick={handleAddNPC} />
+          </div>
+          <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Add Potion" severity="warning" onClick={handleAddPotion} />
           </div>
         </div>  
       </div>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "primereact/button";
-import { settlementData } from "../data/settlement"
+import { settlementData } from "../../data/settlement"
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Panel } from "primereact/panel";
-import GenerateShop from "./Shop";
-import GenerateTavern from "./Tavern";
-import GenerateNPC from "./NPC";
+import GenerateShop from "../Shop";
+import GenerateTavern from "../Tavern";
+import GenerateNPC from "../NPC";
 
 export default function GenerateSettlement(props) {
     const NAME1     = 0;
