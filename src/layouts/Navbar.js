@@ -2,12 +2,12 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 export default function Navbar() {
     return <nav className="nav">
-        <Link to="/" className="site-title">
+        <Link to="/ttrpg-info-gen/" className="site-title">
             TTRPG Info Generator
         </Link>
         <ul>
-            <CustomLink to="/gen-test">Generate Info</CustomLink>
-            <CustomLink to="/gen-num">Generate Number</CustomLink>
+            <CustomLink to="/ttrpg-info-gen/gen-info">Generate Info</CustomLink>
+            <CustomLink to="/ttrpg-info-gen/gen-num">Generate Number</CustomLink>
         </ul>
     </nav>
 }

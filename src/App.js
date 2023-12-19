@@ -16,9 +16,11 @@ function App() {
       <Navbar />
       <div className='container'>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/gen-test" element={<GenerateInfo />} />
-          <Route path="/gen-num" element={<GenerateNum />} />
+          <Route path="/ttrpg-info-gen/">
+            <Route index element={<Home />} />
+            <Route path="gen-info" element={<GenerateInfo />} />
+            <Route path="gen-num" element={<GenerateNum />} />
+          </Route>
         </Routes>
       </div>
     </>
