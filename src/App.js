@@ -9,12 +9,13 @@ import Home from './pages/Home';
 import GenerateInfo from './pages/GenerateInfo'
 import GenerateNum from './pages/GenerateNum';
 import { Route, Routes } from "react-router-dom";
+import Footer from './layouts/Footer';
 
 function App() {
   return (
     <>
       <Navbar />
-      <div className='container'>
+      <div className='page-container container'>
         <Routes>
           <Route path="/ttrpg-info-gen/">
             <Route index element={<Home />} />
@@ -23,6 +24,7 @@ function App() {
           </Route>
         </Routes>
       </div>
+      <Footer />
     </>
   )
 }
