@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/ttrpg-info-gen/static/css/main.29b22bf3.css",
+    "main.js": "/ttrpg-info-gen/static/js/main.98d48857.js",
+    "static/js/787.bd8f8d04.chunk.js": "/ttrpg-info-gen/static/js/787.bd8f8d04.chunk.js",
+    "static/media/primeicons.svg": "/ttrpg-info-gen/static/media/primeicons.e1441b135b3ca9ad643c.svg",
+    "static/media/primeicons.eot": "/ttrpg-info-gen/static/media/primeicons.d44157bdfa026dc877af.eot",
+    "static/media/primeicons.woff": "/ttrpg-info-gen/static/media/primeicons.10d3152104f2208ac82a.woff",
+    "static/media/primeicons.ttf": "/ttrpg-info-gen/static/media/primeicons.ea5358601d0a3fd6670b.ttf",
+    "static/media/primeicons.woff2": "/ttrpg-info-gen/static/media/primeicons.78172950b335ccdb94e2.woff2",
+    "static/media/color.png": "/ttrpg-info-gen/static/media/color.6441e63a57ccc5105bad.png",
+    "index.html": "/ttrpg-info-gen/index.html",
+    "main.29b22bf3.css.map": "/ttrpg-info-gen/static/css/main.29b22bf3.css.map",
+    "main.98d48857.js.map": "/ttrpg-info-gen/static/js/main.98d48857.js.map",
+    "787.bd8f8d04.chunk.js.map": "/ttrpg-info-gen/static/js/787.bd8f8d04.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.29b22bf3.css",
+    "static/js/main.98d48857.js"
+  ]
+}
