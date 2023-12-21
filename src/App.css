@@ -55,9 +55,22 @@ body {
   background: var(--surface-card);
   padding: 2rem;
   border-radius: 2rem;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-bottom: 1rem;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 1%;
+}
+
+.p-panel .p-panel-header{
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.p-panel .p-panel-content {
+  padding: .5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 }
 
 .App {

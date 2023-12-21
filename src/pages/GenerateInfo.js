@@ -8,7 +8,7 @@ import GenerateSettlement from "../components/settlement/Settlement";
 import GenerateShop from "../components/Shop";
 import GenerateTavern from "../components/Tavern";
 import GenerateNPC from "../components/NPC";
-import GeneratePotion from "../components/objects/Potion";
+import GenerateItem from "../components/items/Item";
 import format from "../utils/format";
 
 export default function GenerateInfo() {
@@ -123,12 +123,12 @@ export default function GenerateInfo() {
     })
   }
 
-  function handleAddPotion(e) {
+  function handleAddItem(e) {
     setNumCurr(numCurr+1);
-    var genKey = "potion" + numCurr;
+    var genKey = "item" + numCurr;
     var currGen = {parent: "null", key: genKey, handleRemove: handleRemoveChild}
     setGens(prevGens => {
-      return [...prevGens, <GeneratePotion key={`null_${genKey}`} props={currGen} />]
+      return [...prevGens, <GenerateItem key={`null_${genKey}`} props={currGen} />]
     })
   }
   
@@ -164,7 +164,7 @@ export default function GenerateInfo() {
               <Button className="p-inputgroup-addon" label="Add NPC" severity="help" onClick={handleAddNPC} />
           </div>
           <div className="flex-auto">
-              <Button className="p-inputgroup-addon" label="Add Potion" severity="warning" onClick={handleAddPotion} />
+              <Button className="p-inputgroup-addon" label="Add Item(s)" severity="warning" onClick={handleAddItem} />
           </div>
         </div>  
       </div>

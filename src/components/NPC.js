@@ -4,6 +4,7 @@ import { npcData } from "../data/npcs"
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Panel } from "primereact/panel";
+import GenerateItem from "./items/Item";
 
 
 export default function GenerateNPC(props) {
@@ -40,6 +41,10 @@ export default function GenerateNPC(props) {
     const [height, setHeight] = useState('');
     const [bodyType, setBodyType] = useState('');
     const [notes, setNotes] = useState('');
+    // "Children" Stuff
+    const [numCurr, setNumCurr] = useState(1);
+    const [gens, setGens] = useState([]);
+    const [children, setChildren] = useState([]);
 
     
     useEffect(() => {
@@ -49,7 +54,7 @@ export default function GenerateNPC(props) {
     useEffect(() => {
         handleMakeJSON();
     }, [firstName, lastName, personality, race, hairColor, eyeColor,
-        eyeType, earType, mouthType, noseType, jawType, hairType, height, notes, bodyType])
+        eyeType, earType, mouthType, noseType, jawType, hairType, height, notes, bodyType, children])
 
     function randomNumber(options) {
       // Get the number between 0 (inclusive) and max (exclusive) for an array
@@ -59,6 +64,7 @@ export default function GenerateNPC(props) {
     const handleMakeJSON = () => {
         const json = {
             parent:         parent,
+            children:       children,
             type:           'npc',
             firstName:      firstName,
             lastName:       lastName,
@@ -84,12 +90,24 @@ export default function GenerateNPC(props) {
         props.props.handleRemove(key);
       }
   
-      // Handle Removal of childGen
-      //function handleRemoveChild(key) { 
-      //  setGens(current => current.filter(gen => gen.key !== key));
-      //  setChildren(current => current.filter(child => child !== key));
-      //  sessionStorage.removeItem(key);
-      // }
+    // Handle Removal of childGen
+      function handleRemoveChild(key) { 
+       setGens(current => current.filter(gen => gen.key !== key));
+       setChildren(current => current.filter(child => child !== key));
+       sessionStorage.removeItem(key);
+      }
+
+      function handleAddItem(e) {
+        setNumCurr(numCurr+1);
+        var genKey = "potion" + numCurr;
+        var currGen = {parent: key, key: genKey, handleRemove: handleRemoveChild}
+        setChildren(prevChildren => {
+            return [...prevChildren, `${key}_${genKey}`]
+        })
+        setGens(prevNPCs => {
+            return [...prevNPCs, <GenerateItem key={`${key}_${genKey}`} props={currGen} />]
+        })
+        }
 
     // Runs the First Name Gen
     const handleFirstName = () => {
@@ -320,12 +338,17 @@ export default function GenerateNPC(props) {
         <br></br>
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Add Item(s)" severity="warning" onClick={handleAddItem} />
+            </div>
+            <div className="flex-auto">
                 <Button className="p-inputgroup-addon" label="Regenerate NPC" severity="help" onClick={handleNPC} />
             </div>
             <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />
             </div>
         </div>
+        <br></br>
+            <div className="flex-auto">{gens}</div>
       </Panel>
     );
 }

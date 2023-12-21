@@ -5,7 +5,7 @@ export default function format(param) {
 
     var output = '';
 
-    for (var i = 0; i < input.parent.split("_").length; i++) {
+    for (var i = 0; i < input.parent.split("_").length && i < 6; i++) {
         output += '#';
     }
 
@@ -98,20 +98,27 @@ export default function format(param) {
         `- **Nose**: ${input.noseType}\n` +
         `- **Jaw**: ${input.jawType}\n` +
         `- **Body**: ${input.height} ${input.bodyType}\n`;
+    } else if (input.type === 'items') {
+        if (input.parent === 'null') {
+            output = `# Items\n`
+        } else {
+            output =
+            `- **Items**:\n`;
+        }
     } else if (input.type === 'item') {
         if (input.subtype === 'potion') {
-            output +=
-            ` (Potion) ${input.title} of ${input.effect.split('.')[0]}\n` +
-            ` - **Effect**: ${input.effect}\n` +
-            ` - **Strength**: ${input.strength}\n` +
-            ` - **Side Effect**: ${input.sideEffect}\n` +
-            ` - **container**: ${input.container}\n` +
-            ` - **Appearance1**: ${input.appearance1}\n` +
-            ` - **Appearance2**: ${input.appearance2}\n` +
-            ` - **Texture:**: ${input.texture}\n` +
-            ` - **Smell**: ${input.smell}\n` +
-            ` - **Taste**: ${input.taste}\n` +
-            ` - **Label**: ${input.label}\n`
+            output =
+            `   - ==(Potion) ${input.title} of ${input.effect.split('.')[0]}==\n` +
+            `       - **Effect**: ${input.effect}\n` +
+            `       - **Strength**: ${input.strength}\n` +
+            `       - **Side Effect**: ${input.sideEffect}\n` +
+            `       - **Container**: ${input.container}\n` +
+            `       - **Appearance1**: ${input.appearance1}\n` +
+            `       - **Appearance2**: ${input.appearance2}\n` +
+            `       - **Texture:**: ${input.texture}\n` +
+            `       - **Smell**: ${input.smell}\n` +
+            `       - **Taste**: ${input.taste}\n` +
+            `       - **Label**: ${input.label}\n`
         }
     }
     if (input.notes !== '') {
