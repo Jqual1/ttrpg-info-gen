@@ -86,7 +86,7 @@ body {
 .page-container{
   display: flex;
   flex-direction: column;
-  min-height: 88dvh;
+  min-height: 99vh;
   margin: 1vh;
   text-align: center;
 }

@@ -53,7 +53,8 @@ export default function GeneratePotion(props) {
     const handleMakeJSON = () => {
         const json = {
             parent:         parent,
-            type:           'potion',
+            type:           'item',
+            subtype:        'potion',
             title:          title,
             effect:         effect,
             strength:       strength,

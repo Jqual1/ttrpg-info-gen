@@ -316,6 +316,9 @@ export default function GenerateNPC(props) {
                     </span>
                 </div>
             </div>
+        </div>
+        <br></br>
+        <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <Button className="p-inputgroup-addon" label="Regenerate NPC" severity="help" onClick={handleNPC} />
             </div>

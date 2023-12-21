@@ -98,19 +98,21 @@ export default function format(param) {
         `- **Nose**: ${input.noseType}\n` +
         `- **Jaw**: ${input.jawType}\n` +
         `- **Body**: ${input.height} ${input.bodyType}\n`;
-    } else if (input.type === 'potion') {
-        output +=
-        ` (Potion) ${input.title} of ${input.effect.split('.')[0]}\n` +
-        ` - **Effect**: ${input.effect}\n` +
-        ` - **Strength**: ${input.strength}\n` +
-        ` - **Side Effect**: ${input.sideEffect}\n` +
-        ` - **container**: ${input.container}\n` +
-        ` - **Appearance1**: ${input.appearance1}\n` +
-        ` - **Appearance2**: ${input.appearance2}\n` +
-        ` - **Texture:**: ${input.texture}\n` +
-        ` - **Smell**: ${input.smell}\n` +
-        ` - **Taste**: ${input.taste}\n` +
-        ` - **Label**: ${input.label}\n`
+    } else if (input.type === 'item') {
+        if (input.subtype === 'potion') {
+            output +=
+            ` (Potion) ${input.title} of ${input.effect.split('.')[0]}\n` +
+            ` - **Effect**: ${input.effect}\n` +
+            ` - **Strength**: ${input.strength}\n` +
+            ` - **Side Effect**: ${input.sideEffect}\n` +
+            ` - **container**: ${input.container}\n` +
+            ` - **Appearance1**: ${input.appearance1}\n` +
+            ` - **Appearance2**: ${input.appearance2}\n` +
+            ` - **Texture:**: ${input.texture}\n` +
+            ` - **Smell**: ${input.smell}\n` +
+            ` - **Taste**: ${input.taste}\n` +
+            ` - **Label**: ${input.label}\n`
+        }
     }
     if (input.notes !== '') {
     output += `- **Notes**: ${input.notes}\n`;

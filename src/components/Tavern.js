@@ -261,7 +261,6 @@ export default function GenerateTavern(props) {
                     </span>
                 </div>
             </div>
-            <div className="flex-auto">{gens}</div>
         </div>
         <br></br>
         <div className="flex flex-wrap gap-3 p-fluid">
@@ -275,6 +274,8 @@ export default function GenerateTavern(props) {
               <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />
             </div>
         </div>
+        <br></br>
+            <div className="flex-auto">{gens}</div>
     </Panel>
     );
 }
