@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ttrpg-info-gen/static/css/main.5530e90b.css",
-    "main.js": "/ttrpg-info-gen/static/js/main.b9d0d017.js",
+    "main.js": "/ttrpg-info-gen/static/js/main.c997c5ad.js",
     "static/js/787.bd8f8d04.chunk.js": "/ttrpg-info-gen/static/js/787.bd8f8d04.chunk.js",
     "static/media/primeicons.svg": "/ttrpg-info-gen/static/media/primeicons.e1441b135b3ca9ad643c.svg",
     "static/media/primeicons.eot": "/ttrpg-info-gen/static/media/primeicons.d44157bdfa026dc877af.eot",
@@ -11,11 +11,11 @@
     "static/media/color.png": "/ttrpg-info-gen/static/media/color.6441e63a57ccc5105bad.png",
     "index.html": "/ttrpg-info-gen/index.html",
     "main.5530e90b.css.map": "/ttrpg-info-gen/static/css/main.5530e90b.css.map",
-    "main.b9d0d017.js.map": "/ttrpg-info-gen/static/js/main.b9d0d017.js.map",
+    "main.c997c5ad.js.map": "/ttrpg-info-gen/static/js/main.c997c5ad.js.map",
     "787.bd8f8d04.chunk.js.map": "/ttrpg-info-gen/static/js/787.bd8f8d04.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5530e90b.css",
-    "static/js/main.b9d0d017.js"
+    "static/js/main.c997c5ad.js"
   ]
 }
