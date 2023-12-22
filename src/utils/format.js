@@ -119,6 +119,15 @@ export default function format(param) {
             `       - **Smell**: ${input.smell}\n` +
             `       - **Taste**: ${input.taste}\n` +
             `       - **Label**: ${input.label}\n`
+        } else if (input.subtype === 'poison') {
+            output =
+            `   - ==(Poison)==\n` +
+            `       - **Effect**: ${input.effect}\n` +
+            `       - **Texture**: ${input.texture}\n` +
+            `       - **Color**: ${input.color}\n` +
+            `       - **Ingredient**: ${input.ingredient}\n` +
+            `       - **Prepared by**: ${input.prepared}\n` +
+            `       - **Most Effective When**: ${input.effective}\n`
         }
     }
     if (input.notes !== '') {

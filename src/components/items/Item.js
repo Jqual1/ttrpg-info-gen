@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import { Panel } from "primereact/panel";
 import GeneratePotion from "./Potion";
+import GeneratePoison from "./Poison";
 
 
 export default function GenerateItem(props) {
@@ -52,11 +53,26 @@ export default function GenerateItem(props) {
     })
     }
 
+    function handleAddPoison(e) {
+      setNumCurr(numCurr+1);
+      var genKey = "potion" + numCurr;
+      var currGen = {parent: key, key: genKey, handleRemove: handleRemoveChild}
+      setChildren(prevChildren => {
+          return [...prevChildren, `${key}_${genKey}`]
+      })
+      setGens(prevNPCs => {
+          return [...prevNPCs, <GeneratePoison key={`${key}_${genKey}`} props={currGen} />]
+      })
+      }
+
     return (
     <Panel header={"Items"} >
         <div className="flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Add Potion" severity="warning" onClick={handleAddPotion} />
+            </div>
+            <div className="flex-auto">
+              <Button className="p-inputgroup-addon" label="Add Poison" severity="warning" onClick={handleAddPoison} />
             </div>
             <div className="flex-auto">
               <Button className="p-inputgroup-addon" label="Remove Gen" severity="danger" onClick={handleRemoveThis} />
